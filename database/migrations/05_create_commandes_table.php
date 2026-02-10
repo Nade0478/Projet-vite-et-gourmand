@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('commandes', function (Blueprint $table) {
             $table->id();
+            $table->string('numéro_commande');
+            $table->date('date_prestation');
+            $table->string('statut');
+            $table->date('heure_livraison');
+            $table->int('prix_menu');
+            $table->int('prix_livraison');
+            $table->int('nombre_personnes');
+            $table->string('pret_materiel');
+            $table->string('réalisation_materiel');
             $table->timestamps();
         });
     }

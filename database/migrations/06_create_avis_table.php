@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('avis', function (Blueprint $table) {
             $table->id();
+            $table->string('commentaire');
+            $table->integer('note');
+            $table->boolean('is_approved')->default(false);
             $table->timestamps();
         });
     }

@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('plats', function (Blueprint $table) {
             $table->id();
+            $table->string('title_plat');
+            $table->string('img_plat');
             $table->timestamps();
         });
     }
