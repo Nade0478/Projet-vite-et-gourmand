@@ -7,6 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
-    /** @use HasFactory<\Database\Factories\RoleFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+    ];
+
+    // Un rôle possède plusieurs utilisateurs
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }

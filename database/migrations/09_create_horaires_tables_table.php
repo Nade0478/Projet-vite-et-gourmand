@@ -6,22 +6,24 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('horaires_tables', function (Blueprint $table) {
+        Schema::create('horaires', function (Blueprint $table) {
             $table->id();
+
+            // Jour de la semaine
+            $table->string('jour');
+
+            // Heures d'ouverture et de fermeture
+            $table->time('heure_ouverture');
+            $table->time('heure_fermeture');
+
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('horaires_tables');
+        Schema::dropIfExists('horaires');
     }
 };

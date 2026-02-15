@@ -6,22 +6,26 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('menu_plat_tables', function (Blueprint $table) {
-            $table->id();
+        Schema::create('menu_plat', function (Blueprint $table) {
+
+            // Clés étrangères
+            $table->foreignId('menu_id')->constrained('menus')->onDelete('cascade');
+            $table->foreignId('plat_id')->constrained('plats')->onDelete('cascade');
+
+            // Quantité optionnelle
+            $table->integer('quantite')->default(1);
+
             $table->timestamps();
+
+            // Empêche les doublons menu/plat
+            $table->primary(['menu_id', 'plat_id']);
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('menu_plat_tables');
+        Schema::dropIfExists('menu_plat');
     }
 };

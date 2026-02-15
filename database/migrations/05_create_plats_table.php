@@ -6,20 +6,20 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('plats', function (Blueprint $table) {
             $table->id();
+
+            // Champs principaux
+            $table->string('titre_plat');
+            $table->text('description')->nullable();
+            $table->string('photo_path')->nullable(); // chemin vers l'image
+
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('plats');
