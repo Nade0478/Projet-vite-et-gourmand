@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('horaires', function (Blueprint $table) {
+        Schema::create('menu_plat_tables', function (Blueprint $table) {
             $table->id();
-            $table->string('heure_ouverture');
-            $table->string('heure_fermeture');
             $table->timestamps();
         });
     }
@@ -24,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('horaires');
+        Schema::dropIfExists('menu_plat_tables');
     }
 };

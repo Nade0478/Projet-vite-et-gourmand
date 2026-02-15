@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('suivi_commandes', function (Blueprint $table) {
+        Schema::create('commandes', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
         });
@@ -22,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('suivi_commandes');
+        Schema::dropIfExists('commandes');
     }
 };

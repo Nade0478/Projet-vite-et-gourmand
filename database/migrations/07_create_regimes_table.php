@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('plats', function (Blueprint $table) {
+        Schema::create('regimes', function (Blueprint $table) {
             $table->id();
-            $table->string('title_plat');
-            $table->string('img_plat');
             $table->timestamps();
         });
     }
@@ -24,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plats');
+        Schema::dropIfExists('regimes');
     }
 };

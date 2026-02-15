@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('avis', function (Blueprint $table) {
+        Schema::create('horaires_tables', function (Blueprint $table) {
             $table->id();
-            $table->string('commentaire');
-            $table->integer('note');
-            $table->boolean('is_approved')->default(false);
             $table->timestamps();
         });
     }
@@ -25,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('avis');
+        Schema::dropIfExists('horaires_tables');
     }
 };
