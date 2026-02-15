@@ -4,20 +4,22 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Horaire_table>
- */
-class HoraireTableFactory extends Factory
+class HoraireFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
-            //
+            'jour' => $this->faker->randomElement([
+                'Lundi',
+                'Mardi',
+                'Mercredi',
+                'Jeudi',
+                'Vendredi',
+                'Samedi',
+                'Dimanche'
+            ]),
+            'heure_ouverture' => $this->faker->time('H:i'),
+            'heure_fermeture' => $this->faker->time('H:i'),
         ];
     }
 }

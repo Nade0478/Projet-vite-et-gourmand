@@ -7,6 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Regime extends Model
 {
-    /** @use HasFactory<\Database\Factories\RegimeFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'libelle',
+    ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | RELATIONS
+    |--------------------------------------------------------------------------
+    */
+
+    // Un régime possède plusieurs menus
+    public function menus()
+    {
+        return $this->hasMany(Menu::class);
+    }
 }

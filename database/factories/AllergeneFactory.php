@@ -4,20 +4,19 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Allergene>
- */
 class AllergeneFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
-            //
+            'libelle' => $this->faker->randomElement([
+                'Gluten',
+                'Lactose',
+                'Arachides',
+                'Soja',
+                'Œufs',
+                'Poisson'
+            ]),
         ];
     }
 }

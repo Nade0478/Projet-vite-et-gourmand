@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,11 +14,40 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Ordre IMPORTANT pour respecter les clés étrangères
 
-        User::factory()->create([
-            'prenom' => 'Test',
-            'nom' => 'User',
-        ]);
+        // 1. Rôles
+        $this->call(RoleSeeder::class);
+
+        // 2. Utilisateurs
+        $this->call(UserSeeder::class);
+
+        // 3. Régimes alimentaires
+        $this->call(RegimeSeeder::class);
+
+        // 4. Thèmes
+        $this->call(ThemeSeeder::class);
+
+        // 5. Plats
+        $this->call(PlatSeeder::class);
+
+        // 6. Allergènes
+        $this->call(AllergeneSeeder::class);
+
+        // 7. Menus
+        $this->call(MenuSeeder::class);
+
+        // 8. Horaires
+        $this->call(HoraireSeeder::class);
+
+        // 9. Avis
+        $this->call(AvisSeeder::class);
+
+        // 10. Tables pivot (si tu veux les remplir plus tard)
+        // $this->call(MenuPlatSeeder::class);
+        // $this->call(CommandeMenuSeeder::class);
+
+        // 11. Commandes (si tu veux en générer)
+        // $this->call(CommandeSeeder::class);
     }
 }

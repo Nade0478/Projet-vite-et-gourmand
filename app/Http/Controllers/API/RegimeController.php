@@ -1,50 +1,46 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Regime;
 use Illuminate\Http\Request;
 
 class RegimeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        return Regime::with('menus')->get();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'libelle' => 'required|string|unique:regimes,libelle',
+        ]);
+
+        return Regime::create($request->all());
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Regime $regime)
     {
-        //
+        return $regime->load('menus');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Regime $regime)
     {
-        //
+        $request->validate([
+            'libelle' => 'required|string|unique:regimes,libelle,' . $regime->id,
+        ]);
+
+        $regime->update($request->all());
+
+        return $regime->load('menus');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Regime $regime)
     {
-        //
+        $regime->delete();
+
+        return response()->json(['message' => 'Régime supprimé']);
     }
 }

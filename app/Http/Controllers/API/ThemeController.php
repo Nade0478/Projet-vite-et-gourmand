@@ -1,50 +1,46 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Theme;
 use Illuminate\Http\Request;
 
 class ThemeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        return Theme::with('menus')->get();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'libelle' => 'required|string|unique:themes,libelle',
+        ]);
+
+        return Theme::create($request->all());
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Theme $theme)
     {
-        //
+        return $theme->load('menus');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Theme $theme)
     {
-        //
+        $request->validate([
+            'libelle' => 'required|string|unique:themes,libelle,' . $theme->id,
+        ]);
+
+        $theme->update($request->all());
+
+        return $theme->load('menus');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Theme $theme)
     {
-        //
+        $theme->delete();
+
+        return response()->json(['message' => 'Thème supprimé']);
     }
 }

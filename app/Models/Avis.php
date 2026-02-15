@@ -7,6 +7,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class Avis extends Model
 {
-    /** @use HasFactory<\Database\Factories\AvisFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'utilisateur_id',
+        'note',
+        'description',
+        'statut',
+    ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | RELATIONS
+    |--------------------------------------------------------------------------
+    */
+
+    // Un avis appartient à un utilisateur
+    public function utilisateur()
+    {
+        return $this->belongsTo(User::class, 'utilisateur_id');
+    }
 }

@@ -1,50 +1,51 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Avis;
 use Illuminate\Http\Request;
 
 class AvisController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        return Avis::with('utilisateur')->get();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'utilisateur_id' => 'required|exists:users,id',
+            'note' => 'required|integer|min:1|max:5',
+            'description' => 'nullable|string',
+            'statut' => 'nullable|string',
+        ]);
+
+        return Avis::create($request->all());
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Avis $avis)
+    public function show(Avis $avi)
     {
-        //
+        return $avi->load('utilisateur');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Avis $avis)
+    public function update(Request $request, Avis $avi)
     {
-        //
+        $request->validate([
+            'note' => 'sometimes|integer|min:1|max:5',
+            'description' => 'sometimes|string',
+            'statut' => 'sometimes|string',
+        ]);
+
+        $avi->update($request->all());
+
+        return $avi->load('utilisateur');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Avis $avis)
+    public function destroy(Avis $avi)
     {
-        //
+        $avi->delete();
+
+        return response()->json(['message' => 'Avis supprimé']);
     }
 }

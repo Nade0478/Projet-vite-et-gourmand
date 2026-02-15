@@ -1,23 +1,25 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Seeders;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Seeder;
+use App\Models\Regime;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Regime>
- */
-class RegimeFactory extends Factory
+class RegimeSeeder extends Seeder
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
+    public function run(): void
     {
-        return [
-            //
+        $regimes = [
+            'Classique',
+            'Végétarien',
+            'Vegan',
+            'Sans gluten',
+            'Halal',
+            'Casher',
         ];
+
+        foreach ($regimes as $r) {
+            Regime::create(['libelle' => $r]);
+        }
     }
 }

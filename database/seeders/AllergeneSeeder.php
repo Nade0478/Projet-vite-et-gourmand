@@ -2,16 +2,28 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Allergene;
 
 class AllergeneSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        
+        $allergenes = [
+            'Gluten',
+            'Lactose',
+            'Fruits à coque',
+            'Arachides',
+            'Soja',
+            'Œufs',
+            'Poisson',
+            'Crustacés',
+            'Moutarde',
+            'Sésame',
+        ];
+
+        foreach ($allergenes as $a) {
+            Allergene::create(['libelle' => $a]);
+        }
     }
 }

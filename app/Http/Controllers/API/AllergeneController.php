@@ -1,50 +1,46 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Allergene;
 use Illuminate\Http\Request;
 
 class AllergeneController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        return Allergene::with('plats')->get();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'libelle' => 'required|string|unique:allergenes,libelle',
+        ]);
+
+        return Allergene::create($request->all());
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Allergene $allergene)
     {
-        //
+        return $allergene->load('plats');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Allergene $allergene)
     {
-        //
+        $request->validate([
+            'libelle' => 'required|string|unique:allergenes,libelle,' . $allergene->id,
+        ]);
+
+        $allergene->update($request->all());
+
+        return $allergene->load('plats');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Allergene $allergene)
     {
-        //
+        $allergene->delete();
+
+        return response()->json(['message' => 'Allergène supprimé']);
     }
 }

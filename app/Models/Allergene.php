@@ -7,6 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Allergene extends Model
 {
-    /** @use HasFactory<\Database\Factories\AllergeneFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'libelle',
+    ];
+
+    /*
+    |--------------------------------------------------------------------------
+    | RELATIONS
+    |--------------------------------------------------------------------------
+    */
+
+    // Un allergène peut concerner plusieurs plats
+    public function plats()
+    {
+        return $this->belongsToMany(Plat::class, 'plat_allergene')
+            ->withTimestamps();
+    }
 }
