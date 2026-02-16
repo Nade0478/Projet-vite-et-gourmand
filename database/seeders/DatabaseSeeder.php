@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         // 2. Utilisateurs
         $this->call(UserSeeder::class);
 
-        // 3. Régimes alimentaires
+        // 3. Régimes
         $this->call(RegimeSeeder::class);
 
         // 4. Thèmes
@@ -43,11 +43,11 @@ class DatabaseSeeder extends Seeder
         // 9. Avis
         $this->call(AvisSeeder::class);
 
-        // 10. Tables pivot (si tu veux les remplir plus tard)
+        // 10. Tables pivot
         // $this->call(MenuPlatSeeder::class);
         // $this->call(CommandeMenuSeeder::class);
 
-        // 11. Commandes (si tu veux en générer)
+        // 11. Commandes (générer)
         // $this->call(CommandeSeeder::class);
     }
 }
