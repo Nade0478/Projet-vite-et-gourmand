@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{
+
+use App\Http\Controllers\API\{
     AllergeneController,
     AvisController,
     CommandeController,
@@ -12,16 +13,20 @@ use App\Http\Controllers\{
     RegimeController,
     RoleController,
     ThemeController,
-    UserController
+    UserController,
+    AuthController
 };
 
-// Route protégée par Sanctum (optionnelle)
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Routes publiques (auth)
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/me', [AuthController::class, 'me']);
+    Route::post('/logout', [AuthController::class, 'logout']);
 });
 
-// Toutes les routes API REST
-Route::middleware('api')->group(function () {
+// Routes protégées par JWT
+Route::middleware('auth:api')->group(function () {
 
     Route::apiResource('roles', RoleController::class);
     Route::apiResource('users', UserController::class);
@@ -33,4 +38,10 @@ Route::middleware('api')->group(function () {
     Route::apiResource('themes', ThemeController::class);
     Route::apiResource('horaires', HoraireController::class);
     Route::apiResource('avis', AvisController::class);
+
+    // infos utilisateur connecté
+    Route::get('me', [AuthController::class, 'me']);
+
+    // déconnexion
+    Route::post('logout', [AuthController::class, 'logout']);
 });
