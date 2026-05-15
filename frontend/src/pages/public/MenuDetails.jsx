@@ -11,7 +11,7 @@ export default function MenuDetails() {
 
   useEffect(() => {
     get(`/menus/${id}`);
-  }, [id]);
+  }, [id, get]);
 
   if (loading) return <Loader />;
 

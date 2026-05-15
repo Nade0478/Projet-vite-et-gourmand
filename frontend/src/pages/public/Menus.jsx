@@ -10,7 +10,7 @@ export default function Menus() {
 
   useEffect(() => {
     get("/menus");
-  }, []);
+  }, [get]);
 
   if (loading) return <Loader />;
 
