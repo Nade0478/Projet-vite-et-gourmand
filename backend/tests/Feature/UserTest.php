@@ -14,7 +14,7 @@ class UserTest extends TestCase
     public function test_get_users_returns_success()
     {
         // Créer le rôle d'abord
-        $role = Role::create(['nom' => 'admin']);
+        $role = Role::create(['name' => 'admin']);
 
         // Créer un utilisateur avec ce rôle
         $user = User::factory()->create(['role_id' => $role->id]);
