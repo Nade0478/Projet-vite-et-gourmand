@@ -8,45 +8,57 @@ use Illuminate\Http\Request;
 
 class AvisController extends Controller
 {
+    // Lister tous les avis
     public function index()
     {
-        return Avis::with('user')->get();
+        $avis = Avis::all();
+        return response()->json($avis);
     }
 
+    // Créer un avis
     public function store(Request $request)
     {
         $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'note' => 'required|integer|min:1|max:5',
+            'note'        => 'required|integer|min:1|max:5',
             'description' => 'nullable|string',
-            'statut' => 'nullable|string',
         ]);
 
-        return Avis::create($request->all());
+        $avis = Avis::create([
+            'user_id'     => auth()->id(),
+            'note'        => $request->note,
+            'description' => $request->description,
+            'statut'      => 'en_attente',
+        ]);
+
+        return response()->json($avis, 201);
     }
 
-    public function show(Avis $avi)
+    // Afficher un avis
+    public function show(string $id)
     {
-        return $avi->load('user');
+        $avis = Avis::findOrFail($id);
+        return response()->json($avis);
     }
 
-    public function update(Request $request, Avis $avi)
+    // Modifier le statut d'un avis (admin)
+    public function update(Request $request, string $id)
     {
+        $avis = Avis::findOrFail($id);
+
         $request->validate([
-            'note' => 'sometimes|integer|min:1|max:5',
-            'description' => 'sometimes|string',
-            'statut' => 'sometimes|string',
+            'statut' => 'required|in:en_attente,approuve,rejete',
         ]);
 
-        $avi->update($request->all());
+        $avis->update(['statut' => $request->statut]);
 
-        return $avi->load('user');
+        return response()->json($avis);
     }
 
-    public function destroy(Avis $avi)
+    // Supprimer un avis
+    public function destroy(string $id)
     {
-        $avi->delete();
-
+        $avis = Avis::findOrFail($id);
+        $avis->delete();
         return response()->json(['message' => 'Avis supprimé']);
     }
 }

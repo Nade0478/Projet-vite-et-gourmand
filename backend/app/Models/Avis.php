@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use MongoDB\Laravel\Eloquent\Model;
 
 class Avis extends Model
 {
-    use HasFactory;
+    protected $connection = 'mongodb';
+    protected $collection = 'avis';
 
     protected $fillable = [
         'user_id',
@@ -16,15 +16,7 @@ class Avis extends Model
         'statut',
     ];
 
-    /*
-    |--------------------------------------------------------------------------
-    | RELATIONS
-    |--------------------------------------------------------------------------
-    */
-
-    // Un avis appartient à un utilisateur
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
+    protected $attributes = [
+        'statut' => 'en_attente',
+    ];
 }
