@@ -40,3 +40,4 @@ Route::apiResource('horaires', HoraireController::class);
 Route::apiResource('avis', AvisController::class);
 
 // });
+Route::get('/health', fn() => ['status' => 'ok']);
