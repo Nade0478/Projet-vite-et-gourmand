@@ -2,6 +2,8 @@ import React, { useEffect, useState, useCallback } from "react";
 import CardMenu from "./CardMenu";
 import MenuEditor from "./MenuEditor";
 
+const API_URL = "https://ton-backend.onrender.com/api"; // ← change ici
+
 export default function MenuList() {
   const [menus, setMenus] = useState([]);
   const [regimes, setRegimes] = useState([]);
@@ -10,7 +12,7 @@ export default function MenuList() {
   const token = localStorage.getItem("auth_token");
 
   const fetchMenus = useCallback(async () => {
-    const response = await fetch("http://localhost:8000/api/menus", {
+    const response = await fetch(`${API_URL}/menus`, {
       headers: { Authorization: `Bearer ${token}` },
     });
 
@@ -19,7 +21,7 @@ export default function MenuList() {
   }, [token]);
 
   const fetchRegimes = useCallback(async () => {
-    const response = await fetch("http://localhost:8000/api/regimes", {
+    const response = await fetch(`${API_URL}/regimes`, {
       headers: { Authorization: `Bearer ${token}` },
     });
 
@@ -28,7 +30,7 @@ export default function MenuList() {
   }, [token]);
 
   const handleDelete = async (id) => {
-    await fetch(`http://localhost:8000/api/menus/${id}`, {
+    await fetch(`${API_URL}/menus/${id}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -37,7 +39,7 @@ export default function MenuList() {
   };
 
   const handleUpdate = async (form) => {
-    await fetch(`http://localhost:8000/api/menus/${editingMenu.id}`, {
+    await fetch(`${API_URL}/menus/${editingMenu.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
