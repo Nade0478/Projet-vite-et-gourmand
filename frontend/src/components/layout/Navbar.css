@@ -1,111 +1,58 @@
+/* Couleurs maquette */
 :root {
   --color-primary: #CCB531;
+  /* doré */
   --color-accent: #6CC4BC;
-  --color-warm: #CC6831;
-  --color-bg: #F5F5F5;
+  /* turquoise */
   --color-text: #333333;
   --color-white: #FFFFFF;
-  --color-purple: #6A4C93;
 }
 
-/* Structure générale */
+/* NAVBAR */
 .navbar {
-  background: var(--color-bg);
-  border-bottom: 2px solid var(--color-primary);
-  padding: 10px 20px;
+  border-bottom: 3px solid var(--color-primary);
+  padding: 12px 0;
 }
 
-.navbar-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-/* Logo plus petit */
+/* LOGO */
 .logo-img {
-  height: 35px;
+  height: 55px;
   width: auto;
 }
 
-/* Burger */
-.burger {
-  font-size: 28px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  display: none;
-  color: var(--color-primary);
-}
-
-/* Navigation desktop */
-.nav-links {
-  display: flex;
-  gap: 40px;
-  align-items: center;
-}
-
-.nav-left,
-.nav-right {
-  display: flex;
-  gap: 20px;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: var(--color-text);
+/* LIENS */
+.nav-link {
+  color: var(--color-text) !important;
+  font-size: 1.2rem;
   font-weight: 500;
-  transition: 0.2s;
+  margin: 0 15px;
+  transition: 0.3s;
 }
 
-.nav-links a:hover {
-  color: var(--color-primary);
+.nav-link:hover {
+  color: var(--color-primary) !important;
 }
 
-/* Login / Register style */
-.nav-right a {
-  padding: 6px 12px;
-  border-radius: 6px;
+/* BOUTON RÉSERVER */
+.btn-reserver {
+  background: var(--color-primary);
+  color: var(--color-white);
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn-reserver:hover {
   background: var(--color-accent);
   color: var(--color-white);
 }
 
-.nav-right a:hover {
-  background: var(--color-primary);
-  color: var(--color-white);
+/* BURGER ICON */
+.navbar-toggler {
+  border-color: var(--color-primary);
 }
 
-/* --- Responsive Mobile --- */
-@media (max-width: 768px) {
-  .burger {
-    display: block;
-  }
-
-  .nav-links {
-    position: absolute;
-    top: 70px;
-    left: 0;
-    width: 100%;
-    background: var(--color-bg);
-    flex-direction: column;
-    padding: 20px 0;
-    gap: 20px;
-    display: none;
-    border-top: 2px solid var(--color-primary);
-  }
-
-  .nav-links.open {
-    display: flex;
-  }
-
-  .nav-left,
-  .nav-right {
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-  }
-
-  .nav-right a {
-    width: 80%;
-    text-align: center;
-  }
+.navbar-toggler-icon {
+  filter: brightness(0) saturate(100%) invert(60%) sepia(80%) hue-rotate(10deg);
 }

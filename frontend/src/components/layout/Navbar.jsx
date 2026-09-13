@@ -1,52 +1,67 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import "../../components/layout/Navbar.css";
 import logo from "../../assets/logo.png";
-
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="navbar">
-      <div className="navbar-container">
-        {/* Logo */}
-        <Link to="/" className="logo" onClick={() => setOpen(false)}>
+    <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+      <div className="container">
+        {/* LOGO */}
+        <Link className="navbar-brand" to="/" onClick={() => setOpen(false)}>
           <img src={logo} alt="Vite & Gourmand" className="logo-img" />
         </Link>
 
-        {/* Burger */}
-        <button className="burger" onClick={() => setOpen(!open)}>
-          ☰
+        {/* BURGER */}
+        <button
+          className="navbar-toggler"
+          type="button"
+          onClick={() => setOpen(!open)}
+        >
+          <span className="navbar-toggler-icon"></span>
         </button>
 
-        {/* Navigation */}
-        <nav className={`nav-links ${open ? "open" : ""}`}>
-          {/* GAUCHE : Accueil / Menus / Contact */}
-          <div className="nav-left">
-            <Link to="/" onClick={() => setOpen(false)}>
-              Accueil
-            </Link>
-            <Link to="/menus" onClick={() => setOpen(false)}>
-              Menus
-            </Link>
-            <Link to="/contact" onClick={() => setOpen(false)}>
-              Contact
-            </Link>
-          </div>
+        {/* NAVIGATION */}
+        <div className={`collapse navbar-collapse ${open ? "show" : ""}`}>
+          {/* CENTRE */}
+          <ul className="navbar-nav mx-auto">
+            <li className="nav-item">
+              <Link className="nav-link" to="/" onClick={() => setOpen(false)}>
+                Accueil
+              </Link>
+            </li>
 
-          {/* DROITE : Login / Register */}
-          <div className="nav-right">
-            <Link to="/login" onClick={() => setOpen(false)}>
-              Login
-            </Link>
-            <Link to="/register" onClick={() => setOpen(false)}>
-              Register
+            <li className="nav-item">
+              <Link
+                className="nav-link"
+                to="/menus"
+                onClick={() => setOpen(false)}
+              >
+                Menu
+              </Link>
+            </li>
+
+            <li className="nav-item">
+              <Link
+                className="nav-link"
+                to="/apropos"
+                onClick={() => setOpen(false)}
+              >
+                À propos
+              </Link>
+            </li>
+          </ul>
+
+          {/* DROITE : bouton Réserver */}
+          <div className="ms-lg-3 mt-3 mt-lg-0">
+            <Link to="/reservation" className="btn btn-reserver">
+              Réserver
             </Link>
           </div>
-        </nav>
+        </div>
       </div>
-    </header>
+    </nav>
   );
 }
