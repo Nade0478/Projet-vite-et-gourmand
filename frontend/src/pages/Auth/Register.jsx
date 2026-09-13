@@ -4,6 +4,8 @@ import Toast from "../../components/ui/Toast";
 import Footer from "../../components/layout/Footer";
 import Navbar from "../../components/layout/Navbar";
 
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8000/api";
+
 export default function Register() {
   const [form, setForm] = useState({
     prenom: "",
@@ -22,14 +24,11 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch(
-      "https://vite-gourmand-back-tfgw.onrender.com/api/register",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      }
-    );
+    const response = await fetch(`${API_URL}/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    });
 
     const data = await response.json();
 

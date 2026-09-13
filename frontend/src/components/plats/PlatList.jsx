@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import CardPlat from "./CardPlat";
 import PlatEditor from "./PlatEditor";
 
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8000/api";
+
 export default function PlatList() {
   const [plats, setPlats] = useState([]);
   const [allergenes, setAllergenes] = useState([]);
@@ -11,28 +13,28 @@ export default function PlatList() {
   const token = localStorage.getItem("auth_token");
 
   const fetchPlats = async () => {
-    const response = await fetch("http://localhost:8000/api/plats", {
+    const response = await fetch(`${API_URL}/plats`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     setPlats(await response.json());
   };
 
   const fetchAllergenes = async () => {
-    const response = await fetch("http://localhost:8000/api/allergenes", {
+    const response = await fetch(`${API_URL}/allergenes`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     setAllergenes(await response.json());
   };
 
   const fetchRegimes = async () => {
-    const response = await fetch("http://localhost:8000/api/regimes", {
+    const response = await fetch(`${API_URL}/regimes`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     setRegimes(await response.json());
   };
 
   const handleDelete = async (id) => {
-    await fetch(`http://localhost:8000/api/plats/${id}`, {
+    await fetch(`${API_URL}/plats/${id}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -40,7 +42,7 @@ export default function PlatList() {
   };
 
   const handleUpdate = async (form) => {
-    await fetch(`http://localhost:8000/api/plats/${editingPlat.id}`, {
+    await fetch(`${API_URL}/plats/${editingPlat.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import CardMenu from "./CardMenu";
 import MenuEditor from "./MenuEditor";
 
-const API_URL = "https://ton-backend.onrender.com/api"; // ← change ici
+const API_URL = "https://vite-gourmand-back-tfgw.onrender.com/api"; // ← change ici
 
 export default function MenuList() {
   const [menus, setMenus] = useState([]);

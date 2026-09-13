@@ -1,6 +1,8 @@
 import { useState } from "react";
 
-export default function useFetch(baseUrl = "http://localhost:8000/api") {
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8000/api";
+
+export default function useFetch(baseUrl = API_URL) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);

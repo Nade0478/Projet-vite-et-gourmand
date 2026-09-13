@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8000/api";
+
 export default function useAuth() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -13,7 +15,7 @@ export default function useAuth() {
     }
 
     try {
-      const response = await fetch("http://backend:8000/api/me", {
+      const response = await fetch(`${API_URL}/me`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -33,7 +35,7 @@ export default function useAuth() {
   }, [token]);
 
   const login = async (email, password) => {
-    const response = await fetch("http://backend:8000/api/login", {
+    const response = await fetch(`${API_URL}/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
