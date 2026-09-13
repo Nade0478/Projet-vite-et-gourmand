@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import useAuth from "../../hooks/useAuth";
-import Button from "../../components/ui/Button";
-import Toast from "../../components/ui/Toast";
 import Footer from "../../components/layout/Footer";
 import Navbar from "../../components/layout/Navbar";
 
@@ -24,38 +22,52 @@ export default function Login() {
     <>
       <Navbar />
 
-      <div className="max-w-md mx-auto mt-20 bg-white p-6 rounded shadow">
-        <h1 className="text-2xl font-bold mb-4">Connexion</h1>
+      <div className="container mt-5">
+        <div className="row justify-content-center">
+          <div className="col-md-5">
+            <div className="card shadow-lg p-4">
+              <h1 className="text-center mb-4">Connexion</h1>
 
-        <form onSubmit={handleSubmit}>
-          <input
-            type="email"
-            placeholder="Email"
-            className="w-full border p-2 rounded mb-3"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+              <form onSubmit={handleSubmit}>
+                {/* Email */}
+                <div className="mb-3">
+                  <label className="form-label">Email</label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    placeholder="Votre email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
 
-          <input
-            type="password"
-            placeholder="Mot de passe"
-            className="w-full border p-2 rounded mb-3"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+                {/* Password */}
+                <div className="mb-3">
+                  <label className="form-label">Mot de passe</label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    placeholder="Votre mot de passe"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
 
-          <Button type="submit" className="w-full">
-            Se connecter
-          </Button>
-        </form>
+                {/* Bouton */}
+                <button type="submit" className="btn btn-primary w-100">
+                  Se connecter
+                </button>
+              </form>
 
-        {toast && (
-          <Toast
-            message={toast.message}
-            type={toast.type}
-            onClose={() => setToast(null)}
-          />
-        )}
+              {/* Toast */}
+              {toast && (
+                <div className="alert alert-danger mt-3" role="alert">
+                  {toast.message}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
 
       <Footer />
