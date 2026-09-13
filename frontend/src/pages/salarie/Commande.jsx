@@ -8,26 +8,33 @@ export default function Avis() {
 
   useEffect(() => {
     get("/avis");
-  }, []);
+  }, [get]);
 
   if (loading) return <Loader />;
 
   return (
-    <div className="p-6">
-      <h1 className="text-3xl font-bold mb-6">Avis des clients</h1>
+    <div className="container mt-4">
+      <h1 className="fw-bold mb-4">Avis des clients</h1>
 
-      {avis?.length === 0 && <p>Aucun avis pour le moment.</p>}
+      {avis?.length === 0 && (
+        <p className="text-muted">Aucun avis pour le moment.</p>
+      )}
 
       {avis?.map((a) => (
-        <div key={a.id} className="bg-white p-4 rounded shadow mb-3">
-          <p className="font-semibold">
-            {a.user?.prenom} {a.user?.nom}
-          </p>
-          <p className="text-gray-700 mt-1">{a.commentaire}</p>
-          <p className="text-sm text-gray-500 mt-2">{a.created_at}</p>
+        <div key={a.id} className="card shadow-sm mb-3">
+          <div className="card-body">
+            <p className="fw-semibold mb-1">
+              {a.user?.prenom} {a.user?.nom}
+            </p>
+
+            <p className="text-muted mb-2">{a.commentaire}</p>
+
+            <p className="text-secondary small">{a.created_at}</p>
+          </div>
         </div>
       ))}
-      <Footer/>
+
+      <Footer />
     </div>
   );
 }

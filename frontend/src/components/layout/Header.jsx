@@ -11,47 +11,83 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-gray-900 text-white px-6 py-4 flex justify-between items-center shadow">
-      <h1 className="text-xl font-bold">
-        <Link to="/">Vite & Gourmand</Link>
-      </h1>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+      <div className="container">
+        {/* Logo / Titre */}
+        <Link className="navbar-brand fw-bold" to="/">
+          Vite & Gourmand
+        </Link>
 
-      <nav className="flex items-center gap-6">
-        {!token && (
-          <>
-            <Link to="/login" className="hover:text-gray-300">
-              Connexion
-            </Link>
-            <Link to="/register" className="hover:text-gray-300">
-              Inscription
-            </Link>
-          </>
-        )}
+        {/* Burger */}
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#headerNav"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
 
-        {token && (
-          <>
-            <Link to="/dashboard" className="hover:text-gray-300">
-              Dashboard
-            </Link>
-            <Link to="/menus" className="hover:text-gray-300">
-              Menus
-            </Link>
-            <Link to="/plats" className="hover:text-gray-300">
-              Plats
-            </Link>
-            <Link to="/commandes" className="hover:text-gray-300">
-              Commandes
-            </Link>
+        {/* Navigation */}
+        <div className="collapse navbar-collapse" id="headerNav">
+          <ul className="navbar-nav ms-auto">
+            {/* Si NON connecté */}
+            {!token && (
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/login">
+                    Connexion
+                  </Link>
+                </li>
 
-            <button
-              onClick={handleLogout}
-              className="bg-red-600 hover:bg-red-700 px-3 py-1 rounded"
-            >
-              Déconnexion
-            </button>
-          </>
-        )}
-      </nav>
-    </header>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/register">
+                    Inscription
+                  </Link>
+                </li>
+              </>
+            )}
+
+            {/* Si connecté */}
+            {token && (
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/dashboard">
+                    Dashboard
+                  </Link>
+                </li>
+
+                <li className="nav-item">
+                  <Link className="nav-link" to="/menus">
+                    Menus
+                  </Link>
+                </li>
+
+                <li className="nav-item">
+                  <Link className="nav-link" to="/plats">
+                    Plats
+                  </Link>
+                </li>
+
+                <li className="nav-item">
+                  <Link className="nav-link" to="/commandes">
+                    Commandes
+                  </Link>
+                </li>
+
+                <li className="nav-item">
+                  <button
+                    onClick={handleLogout}
+                    className="btn btn-danger ms-lg-3"
+                  >
+                    Déconnexion
+                  </button>
+                </li>
+              </>
+            )}
+          </ul>
+        </div>
+      </div>
+    </nav>
   );
 }

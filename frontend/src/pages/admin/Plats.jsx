@@ -10,14 +10,19 @@ export default function Plats() {
   const [toast, setToast] = useState(null);
 
   return (
-    <div className="p-6">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Plats</h1>
-        <Button onClick={() => setOpen(true)}>Ajouter</Button>
+    <div className="container mt-4">
+      {/* Header */}
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h1 className="fw-bold">Plats</h1>
+        <Button variant="primary" onClick={() => setOpen(true)}>
+          Ajouter
+        </Button>
       </div>
 
+      {/* Liste des plats */}
       <PlatList />
 
+      {/* Modal création */}
       <Modal open={open} onClose={() => setOpen(false)} title="Créer un plat">
         <PlatEditor
           onSubmit={() => {
@@ -27,6 +32,7 @@ export default function Plats() {
         />
       </Modal>
 
+      {/* Toast */}
       {toast && (
         <Toast
           message={toast.message}

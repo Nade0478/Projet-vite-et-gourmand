@@ -26,30 +26,38 @@ export default function useAuth() {
         setUser(data);
       } else {
         localStorage.removeItem("auth_token");
+        setUser(null);
       }
     } catch (error) {
       console.error("Erreur récupération user :", error);
+      localStorage.removeItem("auth_token");
+      setUser(null);
     }
 
     setLoading(false);
   }, [token]);
 
   const login = async (email, password) => {
-    const response = await fetch(`${API_URL}/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      const response = await fetch(`${API_URL}/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (response.ok) {
-      localStorage.setItem("auth_token", data.token);
-      setUser(data.user);
-      return { success: true };
+      if (response.ok) {
+        localStorage.setItem("auth_token", data.token);
+        setUser(data.user);
+        return { success: true };
+      }
+
+      return { success: false, error: data.error || "Identifiants incorrects" };
+    } catch (error) {
+      console.error("Erreur login :", error);
+      return { success: false, error: "Erreur réseau" };
     }
-
-    return { success: false, error: data.error };
   };
 
   const logout = () => {

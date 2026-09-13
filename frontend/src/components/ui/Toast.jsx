@@ -11,17 +11,22 @@ export default function Toast({
     return () => clearTimeout(timer);
   }, [duration, onClose]);
 
-  const colors = {
-    success: "bg-green-600",
-    error: "bg-red-600",
-    info: "bg-blue-600",
+  const variants = {
+    success: "bg-success text-white",
+    error: "bg-danger text-white",
+    info: "bg-primary text-white",
   };
 
   return (
-    <div
-      className={`fixed top-4 right-4 px-4 py-2 text-white rounded shadow ${colors[type]}`}
-    >
-      {message}
+    <div className="position-fixed top-0 end-0 p-3" style={{ zIndex: 1055 }}>
+      <div
+        className={`toast show ${variants[type]}`}
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+      >
+        <div className="toast-body">{message}</div>
+      </div>
     </div>
   );
 }

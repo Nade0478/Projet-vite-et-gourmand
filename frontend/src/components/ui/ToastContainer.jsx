@@ -6,15 +6,15 @@ export default function ToastContainer() {
 
   const addToast = (message, type = "info") => {
     const id = Date.now();
-    setToasts([...toasts, { id, message, type }]);
+    setToasts((prev) => [...prev, { id, message, type }]);
   };
 
   const removeToast = (id) => {
-    setToasts(toasts.filter((t) => t.id !== id));
+    setToasts((prev) => prev.filter((t) => t.id !== id));
   };
 
   return (
-    <div>
+    <div className="position-fixed top-0 end-0 p-3" style={{ zIndex: 1060 }}>
       {toasts.map((t) => (
         <Toast
           key={t.id}

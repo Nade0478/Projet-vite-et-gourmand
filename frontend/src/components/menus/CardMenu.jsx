@@ -2,41 +2,44 @@ import React from "react";
 
 export default function CardMenu({ menu, onEdit, onDelete }) {
   return (
-    <div className="border rounded-lg shadow p-4 bg-white">
+    <div className="card shadow-sm mb-4">
+      {/* Image */}
       {menu.image && (
         <img
           src={menu.image}
           alt={menu.nom}
-          className="w-full h-40 object-cover rounded"
+          className="card-img-top"
+          style={{ height: "180px", objectFit: "cover" }}
         />
       )}
 
-      <h3 className="text-xl font-semibold mt-3">{menu.nom}</h3>
+      <div className="card-body">
+        {/* Nom */}
+        <h3 className="card-title">{menu.nom}</h3>
 
-      <p className="text-gray-600 mt-1">{menu.description}</p>
+        {/* Description */}
+        <p className="card-text text-muted">{menu.description}</p>
 
-      <p className="text-lg font-bold mt-2">{menu.prix} €</p>
+        {/* Prix */}
+        <p className="fw-bold fs-5">{menu.prix} €</p>
 
-      {menu.regime && (
-        <p className="text-sm text-green-700 mt-1">
-          Régime : {menu.regime.nom}
-        </p>
-      )}
+        {/* Régime */}
+        {menu.regime && (
+          <span className="badge bg-success mb-2">
+            Régime : {menu.regime.nom}
+          </span>
+        )}
 
-      <div className="flex justify-between mt-4">
-        <button
-          onClick={() => onEdit(menu)}
-          className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700"
-        >
-          Modifier
-        </button>
+        {/* Boutons */}
+        <div className="d-flex justify-content-between mt-3">
+          <button onClick={() => onEdit(menu)} className="btn btn-primary">
+            Modifier
+          </button>
 
-        <button
-          onClick={() => onDelete(menu.id)}
-          className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700"
-        >
-          Supprimer
-        </button>
+          <button onClick={() => onDelete(menu.id)} className="btn btn-danger">
+            Supprimer
+          </button>
+        </div>
       </div>
     </div>
   );

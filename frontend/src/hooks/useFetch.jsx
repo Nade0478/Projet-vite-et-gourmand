@@ -23,21 +23,33 @@ export default function useFetch(baseUrl = API_URL) {
         body: body ? JSON.stringify(body) : null,
       });
 
-      const result = await response.json();
+      const isJson = response.headers
+        .get("content-type")
+        ?.includes("application/json");
+
+      const result = isJson ? await response.json() : null;
 
       if (!response.ok) {
-        setError(result.error || "Erreur inconnue");
+        // Token expiré → on le supprime
+        if (response.status === 401) {
+          localStorage.removeItem("auth_token");
+        }
+
+        setError(result?.error || "Erreur inconnue");
         setLoading(false);
-        return null;
+        return { success: false, error: result?.error || "Erreur inconnue" };
       }
 
       setData(result);
       setLoading(false);
-      return result;
+
+      return { success: true, data: result };
     } catch (err) {
+      console.error("Erreur réseau :", err);
       setError("Erreur réseau");
       setLoading(false);
-      return null;
+
+      return { success: false, error: "Erreur réseau" };
     }
   };
 

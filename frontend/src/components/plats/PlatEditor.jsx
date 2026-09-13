@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-import FormInput from "../forms/FormInput";
-import FormTextarea from "../forms/FormTextarea";
-import FormSelect from "../forms/FormSelect";
 
 export default function PlatEditor({
   initialData = null,
@@ -48,59 +45,91 @@ export default function PlatEditor({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow">
-      <FormInput
-        label="Nom du plat"
-        name="nom"
-        value={form.nom}
-        onChange={handleChange}
-      />
+    <form onSubmit={handleSubmit} className="card p-4 shadow-sm">
+      {/* Nom */}
+      <div className="mb-3">
+        <label className="form-label">Nom du plat</label>
+        <input
+          type="text"
+          name="nom"
+          className="form-control"
+          value={form.nom}
+          onChange={handleChange}
+        />
+      </div>
 
-      <FormTextarea
-        label="Description"
-        name="description"
-        value={form.description}
-        onChange={handleChange}
-      />
+      {/* Description */}
+      <div className="mb-3">
+        <label className="form-label">Description</label>
+        <textarea
+          name="description"
+          className="form-control"
+          rows="3"
+          value={form.description}
+          onChange={handleChange}
+        ></textarea>
+      </div>
 
-      <FormInput
-        label="Prix (€)"
-        name="prix"
-        type="number"
-        value={form.prix}
-        onChange={handleChange}
-      />
+      {/* Prix */}
+      <div className="mb-3">
+        <label className="form-label">Prix (€)</label>
+        <input
+          type="number"
+          name="prix"
+          className="form-control"
+          value={form.prix}
+          onChange={handleChange}
+        />
+      </div>
 
-      <FormSelect
-        label="Régime"
-        name="regime_id"
-        value={form.regime_id}
-        onChange={handleChange}
-        options={regimes.map((r) => ({ value: r.id, label: r.nom }))}
-      />
+      {/* Régime */}
+      <div className="mb-3">
+        <label className="form-label">Régime</label>
+        <select
+          name="regime_id"
+          className="form-select"
+          value={form.regime_id}
+          onChange={handleChange}
+        >
+          <option value="">Sélectionner un régime</option>
+          {regimes.map((r) => (
+            <option key={r.id} value={r.id}>
+              {r.nom}
+            </option>
+          ))}
+        </select>
+      </div>
 
-      <div className="mt-4">
-        <label className="block font-medium mb-1">Allergènes</label>
+      {/* Allergènes */}
+      <div className="mb-3">
+        <label className="form-label">Allergènes</label>
 
-        <div className="grid grid-cols-2 gap-2">
+        <div className="row">
           {allergenes.map((a) => (
-            <label key={a.id} className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                value={a.id}
-                checked={form.allergenes_ids.includes(a.id)}
-                onChange={handleAllergeneChange}
-              />
-              {a.nom}
-            </label>
+            <div key={a.id} className="col-6">
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  value={a.id}
+                  checked={form.allergenes_ids.includes(a.id)}
+                  onChange={handleAllergeneChange}
+                  id={`allergene-${a.id}`}
+                />
+                <label
+                  className="form-check-label"
+                  htmlFor={`allergene-${a.id}`}
+                >
+                  {a.nom}
+                </label>
+              </div>
+            </div>
           ))}
         </div>
       </div>
 
-      <button
-        type="submit"
-        className="mt-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
-      >
+      {/* Bouton */}
+      <button type="submit" className="btn btn-success w-100 mt-3">
         {initialData ? "Mettre à jour" : "Créer le plat"}
       </button>
     </form>

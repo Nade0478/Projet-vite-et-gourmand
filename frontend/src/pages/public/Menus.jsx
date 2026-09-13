@@ -18,16 +18,19 @@ export default function Menus() {
     <>
       <Navbar />
 
-      <div className="p-6">
-        <h1 className="text-3xl font-bold mb-6">Nos menus</h1>
+      <div className="container mt-4">
+        <h1 className="fw-bold mb-4">Nos menus</h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="row g-4">
           {menus?.map((menu) => (
-            <CardMenu key={menu.id} menu={menu} />
+            <div key={menu.id} className="col-12 col-md-6 col-lg-4">
+              <CardMenu menu={menu} />
+            </div>
           ))}
         </div>
       </div>
-      <Footer/>
+
+      <Footer />
     </>
   );
 }

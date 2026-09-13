@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import CardMenu from "./CardMenu";
 import MenuEditor from "./MenuEditor";
 
-const API_URL = "https://vite-gourmand-back-tfgw.onrender.com/api"; // ← change ici
+const API_URL = "https://vite-gourmand-back-tfgw.onrender.com/api";
 
 export default function MenuList() {
   const [menus, setMenus] = useState([]);
@@ -15,7 +15,6 @@ export default function MenuList() {
     const response = await fetch(`${API_URL}/menus`, {
       headers: { Authorization: `Bearer ${token}` },
     });
-
     const data = await response.json();
     setMenus(data);
   }, [token]);
@@ -24,7 +23,6 @@ export default function MenuList() {
     const response = await fetch(`${API_URL}/regimes`, {
       headers: { Authorization: `Bearer ${token}` },
     });
-
     const data = await response.json();
     setRegimes(data);
   }, [token]);
@@ -34,7 +32,6 @@ export default function MenuList() {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
     });
-
     fetchMenus();
   };
 
@@ -58,25 +55,31 @@ export default function MenuList() {
   }, [fetchMenus, fetchRegimes]);
 
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">Liste des menus</h2>
+    <div className="container mt-4">
+      {/* Titre */}
+      <h2 className="mb-4 fw-bold">Liste des menus</h2>
 
+      {/* Formulaire d’édition */}
       {editingMenu && (
-        <MenuEditor
-          initialData={editingMenu}
-          regimes={regimes}
-          onSubmit={handleUpdate}
-        />
+        <div className="mb-4">
+          <MenuEditor
+            initialData={editingMenu}
+            regimes={regimes}
+            onSubmit={handleUpdate}
+          />
+        </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+      {/* Grille Bootstrap */}
+      <div className="row g-4">
         {menus.map((menu) => (
-          <CardMenu
-            key={menu.id}
-            menu={menu}
-            onEdit={setEditingMenu}
-            onDelete={handleDelete}
-          />
+          <div key={menu.id} className="col-12 col-md-6 col-lg-4">
+            <CardMenu
+              menu={menu}
+              onEdit={setEditingMenu}
+              onDelete={handleDelete}
+            />
+          </div>
         ))}
       </div>
     </div>

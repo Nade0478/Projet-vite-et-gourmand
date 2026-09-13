@@ -8,31 +8,47 @@ export default function DashboardSalarie() {
 
   useEffect(() => {
     get("/salarie/dashboard");
-  }, []);
+  }, [get]);
 
   if (loading) return <Loader />;
 
   return (
-    <div className="p-6">
-      <h1 className="text-3xl font-bold mb-6">Tableau de bord salarié</h1>
+    <div className="container mt-4">
+      <h1 className="fw-bold mb-4">Tableau de bord salarié</h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white p-6 rounded shadow">
-          <h2 className="text-xl font-semibold">Commandes du jour</h2>
-          <p className="text-3xl font-bold mt-2">{data?.commandes_du_jour}</p>
+      <div className="row g-4">
+        {/* Commandes du jour */}
+        <div className="col-12 col-md-4">
+          <div className="card shadow-sm">
+            <div className="card-body text-center">
+              <h2 className="fs-5 fw-semibold">Commandes du jour</h2>
+              <p className="fs-2 fw-bold mt-2">{data?.commandes_du_jour}</p>
+            </div>
+          </div>
         </div>
 
-        <div className="bg-white p-6 rounded shadow">
-          <h2 className="text-xl font-semibold">Menus préparés</h2>
-          <p className="text-3xl font-bold mt-2">{data?.menus_prepares}</p>
+        {/* Menus préparés */}
+        <div className="col-12 col-md-4">
+          <div className="card shadow-sm">
+            <div className="card-body text-center">
+              <h2 className="fs-5 fw-semibold">Menus préparés</h2>
+              <p className="fs-2 fw-bold mt-2">{data?.menus_prepares}</p>
+            </div>
+          </div>
         </div>
 
-        <div className="bg-white p-6 rounded shadow">
-          <h2 className="text-xl font-semibold">Heures travaillées</h2>
-          <p className="text-3xl font-bold mt-2">{data?.heures_travaillees}</p>
+        {/* Heures travaillées */}
+        <div className="col-12 col-md-4">
+          <div className="card shadow-sm">
+            <div className="card-body text-center">
+              <h2 className="fs-5 fw-semibold">Heures travaillées</h2>
+              <p className="fs-2 fw-bold mt-2">{data?.heures_travaillees}</p>
+            </div>
+          </div>
         </div>
       </div>
-      <Footer/>
+
+      <Footer />
     </div>
   );
 }
