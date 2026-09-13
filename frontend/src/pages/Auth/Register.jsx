@@ -44,21 +44,24 @@ export default function Register() {
     <>
       <Navbar />
 
-      <div className="max-w-md mx-auto mt-20 bg-white p-6 rounded shadow">
-        <h1 className="text-2xl font-bold mb-4">Inscription</h1>
+      <div
+        className="card p-4 shadow mx-auto mt-5"
+        style={{ maxWidth: "28rem" }}
+      >
+        <h1 className="fs-2 fw-bold mb-4">Inscription</h1>
 
         <form onSubmit={handleSubmit}>
           <input
             name="prenom"
             placeholder="Prénom"
-            className="w-full border p-2 rounded mb-3"
+            className="form-control mb-3"
             onChange={handleChange}
           />
 
           <input
             name="nom"
             placeholder="Nom"
-            className="w-full border p-2 rounded mb-3"
+            className="form-control mb-3"
             onChange={handleChange}
           />
 
@@ -66,7 +69,7 @@ export default function Register() {
             name="email"
             type="email"
             placeholder="Email"
-            className="w-full border p-2 rounded mb-3"
+            className="form-control mb-3"
             onChange={handleChange}
           />
 
@@ -74,18 +77,18 @@ export default function Register() {
             name="password"
             type="password"
             placeholder="Mot de passe"
-            className="w-full border p-2 rounded mb-3"
+            className="form-control mb-3"
             onChange={handleChange}
           />
 
           <input
             name="telephone"
             placeholder="Téléphone"
-            className="w-full border p-2 rounded mb-3"
+            className="form-control mb-3"
             onChange={handleChange}
           />
 
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="btn btn-primary w-100">
             S'inscrire
           </Button>
         </form>

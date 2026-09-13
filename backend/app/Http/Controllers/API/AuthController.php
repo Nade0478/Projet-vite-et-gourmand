@@ -7,16 +7,16 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-/**
- * @mixin \Illuminate\Routing\Controller
- */
-class AuthController extends Controller
+class AuthController extends Controller implements HasMiddleware
 {
-    public function __construct()
+    public static function middleware(): array
     {
-        // Intelephense ne comprend pas cette méthode, mais elle est valide
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        return [
+            new Middleware('auth:api', except: ['login', 'register']),
+        ];
     }
 
     public function register(Request $request)
