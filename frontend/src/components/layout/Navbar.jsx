@@ -54,10 +54,15 @@ export default function Navbar() {
             </li>
           </ul>
 
-          {/* DROITE : bouton Réserver */}
+          {/* DROITE : bouton Connexion et register */}
           <div className="ms-lg-3 mt-3 mt-lg-0">
-            <Link to="/reservation" className="btn btn-reserver">
-              Réserver
+            <Link to="/connexion" className="btn btn-register">
+              Connexion
+            </Link>
+          </div>
+          <div className="ms-lg-3 mt-3 mt-lg-0">
+            <Link to="/register" className="btn btn-register">
+              Register
             </Link>
           </div>
         </div>

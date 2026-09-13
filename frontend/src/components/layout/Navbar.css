@@ -34,7 +34,7 @@
 }
 
 /* BOUTON RÉSERVER */
-.btn-reserver {
+.btn-register {
   background: var(--color-primary);
   color: var(--color-white);
   padding: 10px 22px;
@@ -43,7 +43,7 @@
   transition: 0.3s;
 }
 
-.btn-reserver:hover {
+.btn-register:hover {
   background: var(--color-accent);
   color: var(--color-white);
 }
