@@ -56,7 +56,7 @@ export default function Navbar() {
 
           {/* DROITE : bouton Connexion et register */}
           <div className="ms-lg-3 mt-3 mt-lg-0">
-            <Link to="/connexion" className="btn btn-register">
+            <Link to="/login" className="btn btn-register">
               Connexion
             </Link>
           </div>
