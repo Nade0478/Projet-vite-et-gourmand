@@ -3,65 +3,84 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class UserController extends Controller
+class AuthController extends Controller implements HasMiddleware
 {
-    public function index()
+    public static function middleware(): array
     {
-        return User::with('role')->get();
+        return [
+            new Middleware('auth:api', except: ['login', 'register']),
+        ];
     }
 
-    public function store(Request $request)
+    public function register(Request $request)
     {
         $request->validate([
             'prenom' => 'required|string',
             'nom' => 'required|string',
-            'email' => 'required|email|unique:users,email',
+            'email' => 'required|email|unique:users',
             'password' => 'required|string|min:6',
             'telephone' => 'required|string',
             'role_id' => 'required|exists:roles,id',
         ]);
 
-        $data = $request->all();
-        $data['password'] = Hash::make($request->password);
-
-        return User::create($data);
-    }
-
-    public function show(User $user)
-    {
-        return $user->load('role');
-    }
-
-    public function update(Request $request, User $user)
-    {
-        $request->validate([
-            'prenom' => 'sometimes|string',
-            'nom' => 'sometimes|string',
-            'email' => 'sometimes|email|unique:users,email,' . $user->id,
-            'password' => 'sometimes|string|min:6',
-            'telephone' => 'sometimes|string',
-            'role_id' => 'sometimes|exists:roles,id',
+        $user = User::create([
+            'prenom' => $request->prenom,
+            'nom' => $request->nom,
+            'email' => $request->email,
+            'password' => Hash::make($request->password), // Sécurisé par le hachage du mot de passe
+            'telephone' => $request->telephone,
+            'role_id' => $request->role_id,
         ]);
 
-        $data = $request->all();
+        $token = JWTAuth::fromUser($user);
 
-        if ($request->password) {
-            $data['password'] = Hash::make($request->password);
-        }
-
-        $user->update($data);
-
-        return $user->load('role');
+        return response()->json([
+            'message' => 'Inscription réussie',
+            'user' => $user,
+            'token' => $token
+        ], 201);
     }
 
-    public function destroy(User $user)
+    public function login(Request $request)
     {
-        $user->delete();
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string'
+        ]);
 
-        return response()->json(['message' => 'user supprimé']);
+        if (!$token = JWTAuth::attempt($credentials)) {
+            return response()->json(['error' => 'Identifiants incorrects'], 401);
+        }
+
+        /** @var \App\Models\User|null $user */
+        $user = auth()->user();
+
+        return response()->json([
+            'message' => 'Connexion réussie',
+            'token' => $token,
+            'user' => $user
+        ]);
+    }
+
+    public function me()
+    {
+        /** @var \App\Models\User|null $user */
+        $user = auth()->user();
+
+        return response()->json($user);
+    }
+
+    public function logout()
+    {
+        JWTAuth::invalidate(JWTAuth::getToken());
+
+        return response()->json(['message' => 'Déconnexion réussie']);
     }
 }
