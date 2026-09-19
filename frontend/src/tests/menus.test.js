@@ -2,7 +2,7 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import MenusPage from "../pages/public/Menus";
 import MenuDetail from "../pages/public/MenuDetails";
-import AdminMenuForm from "../pages/admin/Menus";
+// import AdminMenuForm from "../pages/admin/Menus";
 import CardMenu from "../components/menus/CardMenu";
 
 // Données fictives

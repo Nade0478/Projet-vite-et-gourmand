@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8000/api";
 
@@ -9,57 +9,66 @@ export default function useFetch(baseUrl = API_URL) {
 
   const token = localStorage.getItem("auth_token");
 
-  const request = async (endpoint, method = "GET", body = null) => {
-    setLoading(true);
-    setError(null);
+  const request = useCallback(
+    async (endpoint, method = "GET", body = null) => {
+      setLoading(true);
+      setError(null);
 
-    try {
-      const response = await fetch(`${baseUrl}${endpoint}`, {
-        method,
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token ? `Bearer ${token}` : "",
-        },
-        body: body ? JSON.stringify(body) : null,
-      });
+      try {
+        const response = await fetch(`${baseUrl}${endpoint}`, {
+          method,
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: token ? `Bearer ${token}` : "",
+          },
+          body: body ? JSON.stringify(body) : null,
+        });
 
-      const isJson = response.headers
-        .get("content-type")
-        ?.includes("application/json");
-
-      const result = isJson ? await response.json() : null;
-
-      if (!response.ok) {
-        // Token expiré → on le supprime
-        if (response.status === 401) {
-          localStorage.removeItem("auth_token");
+        let result = null;
+        try {
+          result = await response.json();
+        } catch {
+          result = null;
         }
 
-        setError(result?.error || "Erreur inconnue");
+        if (!response.ok) {
+          if (response.status === 401) {
+            localStorage.removeItem("auth_token");
+          }
+
+          setError(result?.error || "Erreur inconnue");
+          setLoading(false);
+          return { success: false, error: result?.error || "Erreur inconnue" };
+        }
+
+        setData(result);
         setLoading(false);
-        return { success: false, error: result?.error || "Erreur inconnue" };
+
+        return { success: true, data: result };
+      } catch (err) {
+        console.error("Erreur réseau :", err);
+        setError("Erreur réseau");
+        setLoading(false);
+
+        return { success: false, error: "Erreur réseau" };
       }
+    },
+    [baseUrl, token]
+  );
 
-      setData(result);
-      setLoading(false);
+  const get = useCallback((endpoint) => request(endpoint, "GET"), [request]);
+  const post = useCallback(
+    (endpoint, body) => request(endpoint, "POST", body),
+    [request]
+  );
+  const put = useCallback(
+    (endpoint, body) => request(endpoint, "PUT", body),
+    [request]
+  );
+  const remove = useCallback(
+    (endpoint) => request(endpoint, "DELETE"),
+    [request]
+  );
 
-      return { success: true, data: result };
-    } catch (err) {
-      console.error("Erreur réseau :", err);
-      setError("Erreur réseau");
-      setLoading(false);
-
-      return { success: false, error: "Erreur réseau" };
-    }
-  };
-
-  return {
-    data,
-    loading,
-    error,
-    get: (endpoint) => request(endpoint, "GET"),
-    post: (endpoint, body) => request(endpoint, "POST", body),
-    put: (endpoint, body) => request(endpoint, "PUT", body),
-    remove: (endpoint) => request(endpoint, "DELETE"),
-  };
+  return { data, loading, error, get, post, put, remove };
 }
