@@ -34,7 +34,7 @@ class AuthController extends Controller implements HasMiddleware
             'prenom' => $request->prenom,
             'nom' => $request->nom,
             'email' => $request->email,
-            'password' => Hash::make($request->password), // Sécurisé par le hachage du mot de passe
+            'password' => Hash::make($request->password),
             'telephone' => $request->telephone,
             'role_id' => $request->role_id,
         ]);

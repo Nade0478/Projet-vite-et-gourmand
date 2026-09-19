@@ -5,6 +5,7 @@ import Footer from "../../components/layout/Footer";
 import Navbar from "../../components/layout/Navbar";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8000/api";
+const ROLE_CLIENT_ID = 3; // à adapter selon l'ID réel du rôle "client" dans ta table roles
 
 export default function Register() {
   const [form, setForm] = useState({
@@ -26,14 +27,20 @@ export default function Register() {
 
     const response = await fetch(`${API_URL}/register`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({ ...form, role_id: ROLE_CLIENT_ID }),
     });
 
     const data = await response.json();
 
     if (!response.ok) {
-      setToast({ message: data.error || "Erreur", type: "error" });
+      setToast({
+        message: data.error || data.message || "Erreur",
+        type: "error",
+      });
       return;
     }
 
