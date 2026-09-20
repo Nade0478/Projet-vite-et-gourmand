@@ -13,7 +13,7 @@ use App\Http\Controllers\API\{
     RoleController,
     ThemeController,
     UserController,
-    AuthController
+    AuthController,
 };
 
 // Routes publiques (auth)
