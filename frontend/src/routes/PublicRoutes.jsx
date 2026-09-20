@@ -5,7 +5,7 @@ import Menus from "../pages/public/Menus";
 import MenuDetails from "../pages/public/MenuDetails";
 import Contact from "../pages/public/Contact";
 import Auth from "../pages/public/Auth";
-import Apropos from "../pages/public/Apropos";
+import Apropos from "../pages/Apropos";
 
 const PublicRoutes = (
   <>
