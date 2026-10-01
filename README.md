@@ -196,7 +196,7 @@ vite-et-gourmand/
 
 ### 2. Configurer l'environnement
 
-Copier le fichier d'exemple et le compléter :
+Copier le fichier d'exemple :
 
 ```bash
 cp backend/.env.example backend/.env
@@ -206,15 +206,25 @@ Variables à renseigner dans `backend/.env` :
 
 | Variable | Exemple | Description |
 |----------|---------|-------------|
-| `APP_KEY` | *(généré automatiquement)* | Clé de chiffrement Laravel |
 | `APP_ENV` | `local` | Environnement : `local` / `production` |
-| `DB_HOST` | `db` | Nom du service MySQL dans Docker |
-| `DB_DATABASE` | `vite_gourmand` | Nom de la base de données |
+| `APP_DEBUG` | `true` | Mettre `false` en production |
+| `APP_KEY` | *(généré par `key:generate`)* | Clé de chiffrement Laravel |
+| `DB_CONNECTION` | `mysql` | Pilote de la base relationnelle |
+| `DB_HOST` | `db` (Docker) ou `127.0.0.1` (WAMP) | Hôte MySQL |
+| `DB_PORT` | `3306` | Port MySQL |
+| `DB_DATABASE` | `vite_et_gourmand` | Nom de la base MySQL |
+| `DB_USERNAME` | `root` | Utilisateur MySQL |
 | `DB_PASSWORD` | `secret` | Mot de passe MySQL |
-| `JWT_SECRET` | *(généré automatiquement)* | Secret JWT pour l'authentification |
-| `JWT_TTL` | `60` | Durée de validité du token (minutes) |
+| `JWT_SECRET` | *(généré par `jwt:secret`)* | Secret JWT |
+| `JWT_ALGO` | `HS256` | Algorithme de signature |
+| `JWT_TTL` | `60` | Validité du token (minutes) |
+| `JWT_REFRESH_TTL` | `20160` | Validité du refresh (minutes, soit 14 jours) |
+| `MONGODB_URI` | `mongodb+srv://<user>:<password>@<cluster>/?retryWrites=true&w=majority` | URI de connexion MongoDB Atlas |
+| `MONGODB_DATABASE` | `vite_et_gourmand` | Nom de la base MongoDB |
 
-> ℹ️ Ne jamais commiter le fichier `.env`. Seul `.env.example` est versionné.
+> ⚠️ Ne jamais commiter `.env` (il contient des secrets). Seul `.env.example` est versionné, avec des valeurs factices.
+> ℹ️ Avec Docker, `DB_HOST` doit valoir `db`. Sans Docker (WampServer), utiliser `127.0.0.1`.
+> ℹ️ MongoDB est hébergé sur Atlas : il n'y a pas de service MongoDB dans `docker-compose.yml`. Ton adresse IP doit être autorisée dans Atlas (Network Access).
 
 ### 3. Construire et démarrer les conteneurs
 
@@ -259,6 +269,7 @@ Le projet orchestre trois services via Docker Compose :
 | `frontend` | `node:20` + `nginx:alpine` | `80` | Build React servi par Nginx |
 | `db` | `mysql:8.0` | `3306` *(interne)* | Base de données MySQL |
 
+La base NoSQL (MongoDB Atlas) est externe aux conteneurs et accessible via `MONGODB_URI`.
 Le service `backend` attend que `db` soit **healthy** avant de démarrer. Les données MySQL sont persistées dans un volume Docker nommé `db_data`.
 
 ---
@@ -344,9 +355,26 @@ ports:
 
 - **Runtime** : Docker (utilise le `Dockerfile` du dossier `backend/`)
 - **Déclencheur** : push sur la branche `main`
-- **Variables à configurer** : `APP_KEY`, `APP_ENV=production`, `APP_DEBUG=false`, `DB_HOST`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`, `JWT_SECRET`
+- **Variables à configurer** :
+
+| Variable | Valeur |
+|----------|--------|
+| `APP_KEY` | Clé générée par `php artisan key:generate --show` |
+| `APP_ENV` | `production` |
+| `APP_DEBUG` | `false` |
+| `DB_HOST` | Hôte de la base MySQL de production |
+| `DB_DATABASE` | Nom de la base MySQL |
+| `DB_USERNAME` | Utilisateur MySQL |
+| `DB_PASSWORD` | Mot de passe MySQL |
+| `JWT_SECRET` | Secret généré par `php artisan jwt:secret --show` |
+| `JWT_ALGO` | `HS256` |
+| `JWT_TTL` | `60` |
+| `MONGODB_URI` | URI de connexion MongoDB Atlas |
+| `MONGODB_DATABASE` | `vite_et_gourmand` |
 
 > ⚠️ En production, `APP_DEBUG` doit être `false` pour ne pas exposer les erreurs détaillées.
+> ℹ️ Les valeurs secrètes (`APP_KEY`, `JWT_SECRET`, `DB_PASSWORD`, `MONGODB_URI`) se saisissent dans l'interface Render (Environment), jamais dans le dépôt Git.
+> ℹ️ Dans Atlas (Network Access), autorise les adresses IP sortantes de Render, sinon la connexion MongoDB sera refusée.
 
 ---
 
