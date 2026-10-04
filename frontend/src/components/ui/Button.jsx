@@ -4,7 +4,7 @@ export default function Button({
   children,
   onClick,
   type = "button",
-  variant = "primary",
+  variant = "black",
   disabled = false,
   className = "",
 }) {

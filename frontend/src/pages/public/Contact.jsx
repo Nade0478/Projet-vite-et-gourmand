@@ -3,6 +3,7 @@ import Navbar from "../../components/layout/Navbar";
 import Footer from "../../components/layout/Footer";
 import Toast from "../../components/ui/Toast";
 import "../../components/forms/Form.css";
+import "../../styles/Accueil.css";
 
 export default function Contact() {
   const [form, setForm] = useState({
