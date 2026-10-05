@@ -5,6 +5,8 @@ import Contact from "../pages/public/Contact";
 import MenuDetails from "../pages/public/MenuDetails";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
+import Apropos from "../pages/public/Apropos";
+
 
 
 export default function AppRoutes() {
@@ -12,11 +14,12 @@ export default function AppRoutes() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/menus" element={<Menus />} />
-        <Route path="/menus/:id" element={<MenuDetails />} />
+        <Route path="/Menus" element={<Menus />} />
+        <Route path="/Menus/:id" element={<MenuDetails />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/Apropos" element={<Apropos />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,9 +1,9 @@
 .footer {
-  background: #000000;
-  padding: 2rem;
+  background: #000;
   color: #ccb531;
+  padding: 2rem;
+  margin-top: auto;
 }
-
 
 .footer-content {
   display: flex;

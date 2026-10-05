@@ -1,10 +1,12 @@
-// pages/Apropos.jsx
-import PresentationEntreprise from "../components/PresentationEntreprise";
-import Equipe from "../components/Equipe";
-import Engagements from "../components/Engagements";
-import AvisClients from "../components/AvisClients";
-import PourquoiApplication from "../components/PourquoiApplication";
-import MentionsEtCGV from "../components/MentionsEtCGV";
+// pages/public/Apropos.jsx
+import PresentationEntreprise from "../../components/PresentationEntreprise";
+import Equipe from "../../components/Equipe";
+import Engagements from "../../components/Engagements";
+import AvisClients from "../../components/AvisClients";
+import PourquoiApplication from "../../components/PourquoiApplication";
+import MentionsEtCGV from "../../components/MentionsEtCGV";
+import Footer from "../../components/layout/Footer";
+import Navbar from "../../components/layout/Navbar";
 
 export default function Apropos() {
   const avis = [
@@ -13,13 +15,17 @@ export default function Apropos() {
   ];
 
   return (
-    <main className="page-apropos">
-      <PresentationEntreprise />
-      <Equipe />
-      <Engagements />
-      <AvisClients avis={avis} />
-      <PourquoiApplication />
-      <MentionsEtCGV />
-    </main>
+    <>
+      <Navbar />
+      <main className="page-apropos">
+        <PresentationEntreprise />
+        <Equipe />
+        <Engagements />
+        <AvisClients avis={avis} />
+        <PourquoiApplication />
+        <MentionsEtCGV />
+      </main>
+      <Footer />
+    </>
   );
 }
