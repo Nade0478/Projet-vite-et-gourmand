@@ -1,5 +1,7 @@
 import React from "react";
-import "./Accueil.css";
+import ClientSatisfait from "../../assets/images/ClientSatisfait.jpg";
+import "../../styles/Accueil.css";
+
 
 const avis = [
   {
@@ -29,6 +31,13 @@ export default function AvisAccueil() {
   return (
     <section className="container text-center my-5">
       <h2 className="fw-bold mb-4">Ils nous font confiance</h2>
+
+      <img
+        src={ClientSatisfait}
+        alt="JulAvis clients"
+        className="img-fluid rounded mb-2"
+        style={{ maxWidth: "200px" }}
+      />
 
       <div className="row justify-content-center">
         {avis.map((a) => (

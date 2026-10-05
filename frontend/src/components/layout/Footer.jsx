@@ -6,10 +6,9 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer-content">
         <div className="footer-section">
-          <h3>Vite & Gourmand</h3>
-          <p>
+          <h3 className="TitreFooter">Vite & Gourmand</h3>
+          <p className="PFooter">
             120 rue de la Marne
-            <br />
             33000 Bordeaux
           </p>
           <p>05 56 00 00 00</p>

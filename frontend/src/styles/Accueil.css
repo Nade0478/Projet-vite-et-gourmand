@@ -1,43 +1,99 @@
 body {
   background-color: #ccb531;
+  margin: 0;
 }
 
-
-.h1 {    
-    color: #000000;
-    font-size: 4rem;
-    margin-bottom: 10px;
-    font-size: 3rem;
-    line-height: 1.5;
-    text-align: center;
+h1 {
+  color: #000000;
+  font-size: 4rem;
+  margin-bottom: 10px;
+  line-height: 1.2;
+  text-align: center;
 }
 
-.h2 {
+h2 {
+  color: #000000;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+  text-decoration: underline;
+}
 
-    font-size: 2rem;
-    margin-bottom: 20px;
-    text-align: center;
-    font-weight: 700;
-    color: #000000;
-    text-align: center;
-    text-decoration: underline;
+h3 {
+  color: #000000;
+  font-size: 1.8rem;
+  text-align: center;
+}
 
-    .nouveautes {
-        font-size: 1.2rem;
-        font-weight: 600;
-        margin-bottom: 10px;
-        color: #000000;
-        text-align: center;
-    }
+.nouveautes {
+  color: #000000;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.title p {
+  color: #000000;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.title a {
+  color: #224728;
+  text-decoration: none;
+}
+
+.hero-image {
+  width: 100%;
+}
+
+.hero-image img {
+  width: 100%;
+  height: 70vh;
+  object-fit: cover;
+  display: block;
+}
+
+/* Responsive : on réduit les titres sur petits écrans */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
   }
-  .title p {
-    color: #000000;
-    margin-bottom: 10px;
-    font-size: 1.2rem;
-    line-height: 1.5;
-    text-align: center;
+  h2 {
+    font-size: 1.8rem;
   }
-  .title a {
-    color: #224728;
-    text-decoration: none;
+  h3 {
+    font-size: 1.4rem;
   }
+  .hero-image img {
+    height: 40vh;
+  }
+}
+.titre-accueil {
+  color: #000;
+  font-size: 4rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.sous-titre {
+  color: #000;
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: underline;
+  margin-bottom: 20px;
+}
+
+.nouveautes {
+  color: #000;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  text-align: center;
+  margin-bottom: 20px;
+}

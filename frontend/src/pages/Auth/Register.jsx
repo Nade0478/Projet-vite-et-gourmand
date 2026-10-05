@@ -95,7 +95,7 @@ export default function Register() {
             onChange={handleChange}
           />
 
-          <Button type="submit" className="btn btn-primary w-100">
+          <Button type="submit" className="btn btn-dark w-100">
             S'inscrire
           </Button>
         </form>
