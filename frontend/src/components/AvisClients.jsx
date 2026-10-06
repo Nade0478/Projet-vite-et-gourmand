@@ -5,7 +5,8 @@ export default function AvisClients() {
   const { data: avis, loading, get } = useFetch();
 
   useEffect(() => {
-    get("/avis"); // Appel API vers AvisController@index
+    get("/avis");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) return <p>Chargement...</p>;
