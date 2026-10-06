@@ -59,6 +59,7 @@ export default function PlatList() {
     fetchPlats();
     fetchAllergenes();
     fetchRegimes();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

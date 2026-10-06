@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import useAuth from "../../hooks/useAuth";
+import Button from "../../components/ui/Button";
 import Footer from "../../components/layout/Footer";
 import Navbar from "../../components/layout/Navbar";
 
@@ -53,10 +54,9 @@ export default function Login() {
                   />
                 </div>
 
-                {/* Bouton */}
-                <button type="submit" className="btn btn-dark w-100">
-                  Se connecter
-                </button>
+                <Button type="submit" className="btn btn-dark w-100">
+                  S'inscrire
+                </Button>
               </form>
 
               {/* Toast */}
