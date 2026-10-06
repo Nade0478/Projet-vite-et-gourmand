@@ -1,0 +1,40 @@
+.page-apropos {
+  max-width: 900px;
+  margin: 0 auto;      /* centre le bloc entier au milieu de la page */
+  padding: 20px;
+  text-align: center;  /* centre les textes */
+}
+
+/* Toutes les images : centrées et jamais plus larges que la page */
+.page-apropos img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Julie et José côte à côte, au centre */
+.equipe-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.membre {
+  max-width: 300px;
+}
+
+/* Listes : on enlève les puces pour un vrai centrage */
+.page-apropos ul {
+  list-style: none;
+  padding: 0;
+}
+
+.membre img {
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1 / 1;   /* carré, identique pour les deux */
+  object-fit: cover;
+  object-position: center top;
+}

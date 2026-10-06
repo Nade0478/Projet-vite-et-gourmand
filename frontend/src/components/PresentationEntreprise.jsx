@@ -1,4 +1,5 @@
-// components/PresentationEntreprise.jsx
+import julieJose from "../assets/images/Julie-jose.png";
+
 export default function PresentationEntreprise() {
   return (
     <section className="presentation-entreprise">
@@ -18,7 +19,7 @@ export default function PresentationEntreprise() {
 
       <div className="presentation-images">
         <img
-          src="/images/entreprise.jpg"
+          src={julieJose}
           alt="Cuisine et ambiance culinaire de Vite & Gourmand"
         />
       </div>

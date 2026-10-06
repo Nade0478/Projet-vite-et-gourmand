@@ -7,8 +7,6 @@ import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 import Apropos from "../pages/public/Apropos";
 
-
-
 export default function AppRoutes() {
   return (
     <BrowserRouter>

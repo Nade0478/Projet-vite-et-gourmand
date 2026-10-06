@@ -1,4 +1,7 @@
 // components/Equipe.jsx
+import julie from "../assets/images/julie.jpg";
+import jose from "../assets/images/jose.png";
+
 export default function Equipe() {
   return (
     <section className="equipe">
@@ -6,13 +9,13 @@ export default function Equipe() {
 
       <div className="equipe-container">
         <div className="membre">
-          <img src="/images/julie.jpg" alt="Julie - gestion et logistique" />
+          <img src={julie} alt="Julie - gestion et logistique" />
           <h3>Julie</h3>
           <p>Gestion, logistique, relation client</p>
         </div>
 
         <div className="membre">
-          <img src="/images/jose.jpg" alt="José - chef cuisinier" />
+          <img src={jose} alt="José - chef cuisinier" />
           <h3>José</h3>
           <p>Cuisine, création des menus</p>
         </div>

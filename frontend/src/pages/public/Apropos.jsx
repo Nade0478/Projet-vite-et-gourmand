@@ -7,6 +7,7 @@ import PourquoiApplication from "../../components/PourquoiApplication";
 import MentionsEtCGV from "../../components/MentionsEtCGV";
 import Footer from "../../components/layout/Footer";
 import Navbar from "../../components/layout/Navbar";
+import "../../styles/Apropos.css";
 
 export default function Apropos() {
   const avis = [
