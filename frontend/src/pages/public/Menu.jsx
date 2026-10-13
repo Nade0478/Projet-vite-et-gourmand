@@ -5,11 +5,11 @@ import Loader from "../../components/ui/Loader";
 import Navbar from "../../components/layout/Navbar";
 import Footer from "../../components/layout/Footer";
 
-export default function Menus() {
+export default function Menu() {
   const { data: menus, loading, get } = useFetch();
 
   useEffect(() => {
-    get("/menus");
+    get("/menu");
   }, [get]);
 
   if (loading) return <Loader />;

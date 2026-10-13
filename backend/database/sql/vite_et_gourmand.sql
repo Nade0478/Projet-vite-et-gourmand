@@ -22,7 +22,7 @@ DROP TABLE IF EXISTS `avis`;
 DROP TABLE IF EXISTS `password_resets`;
 DROP TABLE IF EXISTS `commandes`;
 DROP TABLE IF EXISTS `horaires`;
-DROP TABLE IF EXISTS `menus`;
+DROP TABLE IF EXISTS `menu`;
 DROP TABLE IF EXISTS `plats`;
 DROP TABLE IF EXISTS `allergenes`;
 DROP TABLE IF EXISTS `themes`;
@@ -116,7 +116,7 @@ CREATE TABLE `plats` (
 -- -------------------------------------------------------------
 -- Table : menus
 -- -------------------------------------------------------------
-CREATE TABLE `menus` (
+CREATE TABLE `menu` (
     `id`         BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     `name`       VARCHAR(255) NOT NULL,
     `created_at` TIMESTAMP NULL DEFAULT NULL,

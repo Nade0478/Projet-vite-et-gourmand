@@ -7,11 +7,8 @@ export default function Footer() {
       <div className="footer-content">
         <div className="footer-section">
           <h3 className="TitreFooter">Vite & Gourmand</h3>
-          <p className="PFooter">
-            120 rue de la Marne
-            33000 Bordeaux
-          </p>
-          <p>05 56 00 00 00</p>
+          <p className="PFooter">120 rue de la Marne 33000 Bordeaux</p>
+          <p>Tél : 05 56 00 00 00</p>
           <p>contact@viteetgourmand.fr</p>
         </div>
 

@@ -22,7 +22,7 @@ class Plat extends Model
     */
 
     // Un plat appartient à plusieurs menus
-    public function menus()
+    public function menu()
     {
         return $this->belongsToMany(Menu::class, 'menu_plat')
             ->withPivot(['quantite'])

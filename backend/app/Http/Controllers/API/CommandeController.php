@@ -11,7 +11,7 @@ class CommandeController extends Controller
 {
     public function index()
     {
-        return Commande::with('user', 'menus')->get();
+        return Commande::with('user', 'menu')->get();
     }
 
     public function store(Request $request)
@@ -37,7 +37,7 @@ class CommandeController extends Controller
 
     public function show(Commande $commande)
     {
-        return $commande->load('user', 'menus');
+        return $commande->load('user', 'menu');
     }
 
     public function update(Request $request, Commande $commande)
@@ -54,7 +54,7 @@ class CommandeController extends Controller
 
         $commande->update($request->all());
 
-        return $commande->load('user', 'menus');
+        return $commande->load('user', 'menu');
     }
 
     public function destroy(Commande $commande)

@@ -10,7 +10,7 @@ class PlatController extends Controller
 {
     public function index()
     {
-        return Plat::with(['menus', 'allergenes'])->get();
+        return Plat::with(['menu', 'allergenes'])->get();
     }
 
     public function store(Request $request)
@@ -26,7 +26,7 @@ class PlatController extends Controller
 
     public function show(Plat $plat)
     {
-        return $plat->load(['menus', 'allergenes']);
+        return $plat->load(['menu', 'allergenes']);
     }
 
     public function update(Request $request, Plat $plat)
@@ -39,7 +39,7 @@ class PlatController extends Controller
 
         $plat->update($request->all());
 
-        return $plat->load(['menus', 'allergenes']);
+        return $plat->load(['menu', 'allergenes']);
     }
 
     public function destroy(Plat $plat)

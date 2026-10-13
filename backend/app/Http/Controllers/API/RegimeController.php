@@ -10,7 +10,7 @@ class RegimeController extends Controller
 {
     public function index()
     {
-        return Regime::with('menus')->get();
+        return Regime::with('menu')->get();
     }
 
     public function store(Request $request)
@@ -24,7 +24,7 @@ class RegimeController extends Controller
 
     public function show(Regime $regime)
     {
-        return $regime->load('menus');
+        return $regime->load('menu');
     }
 
     public function update(Request $request, Regime $regime)
@@ -35,7 +35,7 @@ class RegimeController extends Controller
 
         $regime->update($request->all());
 
-        return $regime->load('menus');
+        return $regime->load('menu');
     }
 
     public function destroy(Regime $regime)

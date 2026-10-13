@@ -36,7 +36,7 @@ class Commande extends Model
     }
 
     // Une commande contient plusieurs menus (pivot commande_menu)
-    public function menus()
+    public function menu()
     {
         return $this->belongsToMany(Menu::class, 'commande_menu')
             ->withPivot(['quantite', 'prix_unitaire'])

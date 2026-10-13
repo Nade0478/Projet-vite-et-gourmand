@@ -1,9 +1,9 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import MenusPage from "../pages/public/Menus";
+import MenusPage from "../pages/public/Menu";
 import MenuDetail from "../pages/public/MenuDetails";
 // import AdminMenuForm from "../pages/admin/Menus";
-import CardMenu from "../components/menus/CardMenu";
+import CardMenu from "../components/menu/CardMenu";
 
 // Données fictives
 const fakeMenus = [
@@ -29,7 +29,7 @@ function mockFetch(data, ok = true) {
   });
 }
 
-describe("Menus", () => {
+describe("Menu", () => {
   afterEach(() => {
     jest.clearAllMocks();
     global.fetch = undefined;
@@ -56,7 +56,7 @@ describe("Menus", () => {
     mockFetch(fakeMenus[0]);
 
     render(
-      <MemoryRouter initialEntries={["/menus/1"]}>
+      <MemoryRouter initialEntries={["/menu/1"]}>
         <MenuDetail />
       </MemoryRouter>
     );

@@ -10,7 +10,7 @@ class ThemeController extends Controller
 {
     public function index()
     {
-        return Theme::with('menus')->get();
+        return Theme::with('menu')->get();
     }
 
     public function store(Request $request)
@@ -24,7 +24,7 @@ class ThemeController extends Controller
 
     public function show(Theme $theme)
     {
-        return $theme->load('menus');
+        return $theme->load('menu');
     }
 
     public function update(Request $request, Theme $theme)
@@ -35,7 +35,7 @@ class ThemeController extends Controller
 
         $theme->update($request->all());
 
-        return $theme->load('menus');
+        return $theme->load('menu');
     }
 
     public function destroy(Theme $theme)

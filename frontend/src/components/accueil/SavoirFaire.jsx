@@ -1,12 +1,10 @@
 import React from "react";
-import JulieJose from "../../assets/images/Julie-jose.png";
+import Accueil from "../../assets/images/Accueil.jpg";
 import "../../styles/Accueil.css";
-
 
 export default function SavoirFaire() {
   return (
     <div className="container text-center mt-5">
-
       <h1 className="fw-bold mb-4">Notre Savoir-Faire</h1>
 
       <p className="text-muted mx-auto mb-4" style={{ maxWidth: "800px" }}>
@@ -19,8 +17,8 @@ export default function SavoirFaire() {
       </p>
 
       <img
-        src={JulieJose}
-        alt="Julie et José, fondateurs de Vite & Gourmand"
+        src={Accueil}
+        alt="Image-présentation-vite-et-gourmand"
         className="img-fluid rounded mb-2"
         style={{ maxWidth: "1500px" }}
       />
