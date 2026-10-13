@@ -1,5 +1,6 @@
 import React from "react";
 import "./Footer.css";
+import Horaires from "../../components/layout/Horaires";
 
 export default function Footer() {
   return (
@@ -11,6 +12,8 @@ export default function Footer() {
           <p>Tél : 05 56 00 00 00</p>
           <p>contact@viteetgourmand.fr</p>
         </div>
+
+        <Horaires />
 
         <div className="footer-section">
           <h4>Suivez-nous</h4>
