@@ -52,7 +52,19 @@ export default function Navbar() {
                 À propos
               </Link>
             </li>
+
+
+            <li className="nav-item">
+              <Link
+                className="nav-link"
+                to="/Contact"
+                onClick={() => setOpen(false)}
+              >
+                Contact
+              </Link>
+            </li>
           </ul>
+
 
           {/* DROITE : bouton Connexion et register */}
           <div className="ms-lg-3 mt-3 mt-lg-0">

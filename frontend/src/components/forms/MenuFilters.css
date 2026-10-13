@@ -1,0 +1,45 @@
+.menu-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: #fff;
+  padding: 16px;
+}
+
+.menu-filters__title {
+  text-align: center;
+  color: #cb6b33;
+  font-weight: bold;
+  font-size: 1.3rem;
+  border: 1px solid #cb6b33;
+  padding: 4px 8px;
+  margin-bottom: 40px;
+}
+
+.menu-filters label {
+  font-size: 0.7rem;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.menu-filters input,
+.menu-filters select {
+  border: 1px solid #cb6b33;
+  border-radius: 6px;
+  padding: 10px;
+  background: #fff;
+}
+
+.menu-filters button {
+  margin-top: 16px;
+  background: #cb6b33;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.menu-filters button:hover {
+  background: #b25a28;
+}

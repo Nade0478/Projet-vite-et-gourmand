@@ -6,10 +6,10 @@ export default function MentionsEtCGV() {
 
       <ul>
         <li>
-          <a href="/mentions-legales">Mentions légales</a>
+          <a href="/mentionsLegales">Mentions légales</a>
         </li>
         <li>
-          <a href="/conditions-generales-de-vente">
+          <a href="/conditions">
             Conditions générales de vente
           </a>
         </li>

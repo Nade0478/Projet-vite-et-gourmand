@@ -6,6 +6,8 @@ import MenuDetails from "../pages/public/MenuDetails";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 import Apropos from "../pages/public/Apropos";
+import MentionsLegales from "../pages/public/MentionsLegales";
+import Conditions from "../pages/public/Conditions";
 
 export default function AppRoutes() {
   return (
@@ -18,6 +20,9 @@ export default function AppRoutes() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/Apropos" element={<Apropos />} />
+        <Route path="/Mentionslegales" element={<MentionsLegales />} />
+        <Route path="Conditions" element={<Conditions />} />
+        <Route path="Contact" element={<Contact />} />
       </Routes>
     </BrowserRouter>
   );
