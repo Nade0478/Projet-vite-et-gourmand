@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import useAuth from "../../hooks/useAuth";
-import Button from "../../components/ui/Button";
 import Footer from "../../components/layout/Footer";
 import Navbar from "../../components/layout/Navbar";
 
