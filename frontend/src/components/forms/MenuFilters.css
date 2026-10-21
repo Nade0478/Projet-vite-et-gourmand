@@ -1,45 +1,52 @@
+.menu-container {
+  background-color: #007b75;
+  padding: 20px;
+  border-radius: 8px;
+}
+
 .menu-filters {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
   background: #fff;
   padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgb(0 0 0 / 0.1);
 }
 
-.menu-filters__title {
-  text-align: center;
-  color: #cb6b33;
+.menu-badge {
+  background-color: #cb6b33;
+  color: white;
+  padding: 2px 8px;
   font-weight: bold;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+  display: inline-block;
+}
+
+.menu-card-price {
+  font-weight: 700;
   font-size: 1.3rem;
-  border: 1px solid #cb6b33;
-  padding: 4px 8px;
-  margin-bottom: 40px;
-}
-
-.menu-filters label {
-  font-size: 0.7rem;
-  font-weight: bold;
-  margin-top: 8px;
-}
-
-.menu-filters input,
-.menu-filters select {
-  border: 1px solid #cb6b33;
-  border-radius: 6px;
-  padding: 10px;
-  background: #fff;
-}
-
-.menu-filters button {
-  margin-top: 16px;
-  background: #cb6b33;
   color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 10px;
-  font-weight: bold;
 }
 
-.menu-filters button:hover {
-  background: #b25a28;
+.menu-card-button {
+  background-color: #cb6b33;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  float: right;
+}
+
+.menu-card-button:hover {
+  background-color: #b25a28;
+}
+
+.footer {
+  background-color: #d8a74a;
+  color: #333;
+  padding: 20px;
+  text-align: center;
+  font-size: 0.9rem;
 }

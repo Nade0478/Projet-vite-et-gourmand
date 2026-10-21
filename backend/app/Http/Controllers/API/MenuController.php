@@ -8,14 +8,24 @@ use Illuminate\Http\Request;
 
 class MenuController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return Menu::with(['regime', 'theme', 'plats'])->get();
+        $query = Menu::with(['regime', 'theme', 'plats']);
+
+        if ($request->filled('theme_id')) {
+            $query->where('theme_id', $request->theme_id);
+        }
+
+        if ($request->filled('regime_id')) {
+            $query->where('regime_id', $request->regime_id);
+        }
+
+        return $query->get();
     }
 
     public function store(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'titre' => 'required|string',
             'nombre_personne_min' => 'required|integer',
             'prix_par_personne' => 'required|numeric',
@@ -25,9 +35,9 @@ class MenuController extends Controller
             'theme_id' => 'required|exists:themes,id',
         ]);
 
-        $menu = Menu::create($request->all());
+        $menu = Menu::create($data);
 
-        return $menu->load(['regime', 'theme']);
+        return response()->json($menu->load(['regime', 'theme']), 201);
     }
 
     public function show(Menu $menu)
@@ -37,17 +47,17 @@ class MenuController extends Controller
 
     public function update(Request $request, Menu $menu)
     {
-        $request->validate([
+        $data = $request->validate([
             'titre' => 'sometimes|string',
             'nombre_personne_min' => 'sometimes|integer',
             'prix_par_personne' => 'sometimes|numeric',
-            'description' => 'sometimes|string',
+            'description' => 'sometimes|nullable|string',
             'quantite_restante' => 'sometimes|integer',
             'regime_id' => 'sometimes|exists:regimes,id',
             'theme_id' => 'sometimes|exists:themes,id',
         ]);
 
-        $menu->update($request->all());
+        $menu->update($data);
 
         return $menu->load(['regime', 'theme', 'plats']);
     }
