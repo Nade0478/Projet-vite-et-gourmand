@@ -3,21 +3,32 @@ import { MemoryRouter } from "react-router-dom";
 import MenusPage from "../pages/public/Menu";
 import MenuDetail from "../pages/public/MenuDetails";
 // import AdminMenuForm from "../pages/admin/Menus";
-import CardMenu from "../components/menu/CardMenu";
+import CardMenu from "../components/menus/CardMenu";
 
 // Données fictives
 const fakeMenus = [
   {
     id: 1,
-    nom: "Menu Midi Express",
+    titre: "Menu Midi Express",
     description: "Entrée + plat + dessert",
-    prix: 12.5,
+    prix_par_personne: 15,
+    nombre_personne_min: 1,
+    theme: { id: 1, nom: "Classique" },
+    regime: { id: 1, nom: "Classique" },
+    theme_id: 1,
+    regime_id: 1,
   },
+  // ... idem pour le 2e menu
   {
     id: 2,
-    nom: "Menu Cocktail",
-    description: "Buffet froid et chaud",
-    prix: 25.0,
+    titre: "Menu Festif",
+    description: "Entrée + plat + dessert",
+    prix_par_personne: 25,
+    nombre_personne_min: 10,
+    theme: { id: 1, nom: "Salade de chèvre chaud" },
+    regime: { id: 2, nom: "Magret de canard" },
+    theme_id: 2,
+    regime_id: 1,
   },
 ];
 
@@ -48,7 +59,7 @@ describe("Menu", () => {
       expect(screen.getByText("Menu Midi Express")).toBeInTheDocument();
     });
     await waitFor(() => {
-      expect(screen.getByText("Menu Cocktail")).toBeInTheDocument();
+      expect(screen.getByText("Menu Festif")).toBeInTheDocument();
     });
   });
 
@@ -69,19 +80,19 @@ describe("Menu", () => {
     });
   });
 
-test("Suppression – un menu est supprimé après clic sur Supprimer", async () => {
-  const onDelete = jest.fn();
-  const onEdit = jest.fn();
+  test("Suppression – un menu est supprimé après clic sur Supprimer", async () => {
+    const onDelete = jest.fn();
+    const onEdit = jest.fn();
 
-  render(
-    <MemoryRouter>
-      <CardMenu menu={fakeMenus[0]} onDelete={onDelete} onEdit={onEdit} />
-    </MemoryRouter>
-  );
+    render(
+      <MemoryRouter>
+        <CardMenu menu={fakeMenus[0]} onDelete={onDelete} onEdit={onEdit} />
+      </MemoryRouter>
+    );
 
-  const deleteButton = screen.getByRole("button", { name: /supprimer/i });
-  fireEvent.click(deleteButton);
+    const deleteButton = screen.getByRole("button", { name: /supprimer/i });
+    fireEvent.click(deleteButton);
 
-  expect(onDelete).toHaveBeenCalledWith(1);
-});
+    expect(onDelete).toHaveBeenCalledWith(1);
+  });
 });

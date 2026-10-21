@@ -11,3 +11,67 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.btn-orange {
+  display: inline-block;
+  background-color: #cd6b35;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 16px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-orange:hover {
+  background-color: #b55a28;
+  color: #fff;
+}
+
+.menu-filters {
+  background-color: #fff;
+  height: 100%;
+}
+.menu-filters-title {
+  color: #cd6b35;
+  font-size: 1.5rem;
+  text-align: center;
+  border: 1px solid #999;
+  padding: 4px 8px;
+  margin-bottom: 1.5rem;
+}
+.menu-filters label {
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.menu-list {
+  background-color: #6cc5bd;
+}
+.menu-card {
+  padding: 20px;
+  border-bottom: 4px solid #fff;
+}
+.menu-card:last-child {
+  border-bottom: none;
+}
+.menu-card-theme {
+  display: inline-block;
+  background: #fff;
+  font-size: 1.3rem;
+  padding: 4px 8px;
+  margin-bottom: 1rem;
+}
+.menu-card-title {
+  background-color: #cd6b35;
+  color: #fff;
+  padding: 10px 12px;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+.menu-card-body {
+  background: #fff;
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}

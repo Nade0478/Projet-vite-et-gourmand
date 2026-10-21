@@ -1,37 +1,87 @@
 import React from "react";
-import "./Form.css";
-import "./MenuFilters.css";
 
-export default function MenuFilters({ onFilter }) {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (onFilter) {
-      const data = Object.fromEntries(new FormData(e.target));
-      onFilter(data);
-    }
-  };
+export default function MenuFilters({ menus, filters, setFilters, onSubmit }) {
+  const themes = [
+    ...new Map(
+      menus.filter((m) => m.theme).map((m) => [m.theme.id, m.theme])
+    ).values(),
+  ];
+  const regimes = [
+    ...new Map(
+      menus.filter((m) => m.regime).map((m) => [m.regime.id, m.regime])
+    ).values(),
+  ];
+
+  const change = (e) =>
+    setFilters({ ...filters, [e.target.name]: e.target.value });
 
   return (
-    <form className="menu-filters" onSubmit={handleSubmit}>
-      <h3 className="menu-filters__title">Filtres</h3>
+    <form
+      className="menu-filters p-4"
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSubmit();
+      }}
+    >
+      <h2 className="menu-filters-title">Filtres</h2>
 
-      <label>Prix maximum</label>
-      <input type="number" name="prix" />
+      <label htmlFor="prixMax">Prix maximum</label>
+      <input
+        id="prixMax"
+        name="prixMax"
+        type="number"
+        min="0"
+        className="form-control mb-3"
+        value={filters.prixMax}
+        onChange={change}
+      />
 
-      <label>Thème</label>
-      <select name="theme">
+      <label htmlFor="theme">Thème</label>
+      <select
+        id="theme"
+        name="theme"
+        className="form-select mb-3"
+        value={filters.theme}
+        onChange={change}
+      >
         <option value="">Tous</option>
+        {themes.map((t) => (
+          <option key={t.id} value={t.id}>
+            {t.nom}
+          </option>
+        ))}
       </select>
 
-      <label>Régime</label>
-      <select name="regime">
+      <label htmlFor="regime">Régime</label>
+      <select
+        id="regime"
+        name="regime"
+        className="form-select mb-3"
+        value={filters.regime}
+        onChange={change}
+      >
         <option value="">Tous</option>
+        {regimes.map((r) => (
+          <option key={r.id} value={r.id}>
+            {r.nom}
+          </option>
+        ))}
       </select>
 
-      <label>Nombre minimum</label>
-      <input type="number" name="min" />
+      <label htmlFor="nbMin">Nombre minimum</label>
+      <input
+        id="nbMin"
+        name="nbMin"
+        type="number"
+        min="1"
+        className="form-control mb-4"
+        value={filters.nbMin}
+        onChange={change}
+      />
 
-      <button type="submit">Valider</button>
+      <button type="submit" className="btn-orange w-100">
+        Valider
+      </button>
     </form>
   );
 }

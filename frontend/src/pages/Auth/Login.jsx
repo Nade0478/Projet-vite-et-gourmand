@@ -54,9 +54,9 @@ export default function Login() {
                   />
                 </div>
 
-                <Button type="submit" className="btn btn-dark w-100">
-                  S'inscrire
-                </Button>
+                <button type="submit" className="btn btn-dark w-100">
+                  Se connecter
+                </button>
               </form>
 
               {/* Toast */}

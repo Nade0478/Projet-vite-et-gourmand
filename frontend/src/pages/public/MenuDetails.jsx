@@ -23,27 +23,27 @@ export default function MenuDetails() {
 
       <div className="container my-5">
         <div className="card shadow-sm mx-auto" style={{ maxWidth: "800px" }}>
-          {/* Image */}
           {menu.image && (
             <img
               src={menu.image}
-              alt={menu.nom}
+              alt={menu.titre}
               className="card-img-top"
               style={{ height: "300px", objectFit: "cover" }}
             />
           )}
 
           <div className="card-body">
-            {/* Nom */}
-            <h1 className="card-title fw-bold mb-3">{menu.nom}</h1>
+            <h1 className="card-title fw-bold mb-3">{menu.titre}</h1>
 
-            {/* Description */}
             <p className="text-muted mb-3">{menu.description}</p>
 
-            {/* Prix */}
-            <p className="fs-4 fw-bold mb-3">{menu.prix} €</p>
+            <p className="mb-1">
+              À partir de {menu.nombre_personne_min} personnes
+            </p>
+            <p className="fs-4 fw-bold mb-3">
+              {menu.prix_par_personne} € / pers.
+            </p>
 
-            {/* Régime */}
             {menu.regime && (
               <p className="mb-3">
                 <span className="badge bg-success">
@@ -52,7 +52,6 @@ export default function MenuDetails() {
               </p>
             )}
 
-            {/* Plats inclus */}
             <h2 className="fw-semibold mt-4 mb-3">Plats inclus</h2>
 
             <ul className="list-group">
