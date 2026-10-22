@@ -2,32 +2,49 @@ import { useEffect } from "react";
 import useFetch from "../hooks/useFetch";
 
 export default function AvisClients() {
-  const { data: avis, loading, get } = useFetch();
+  const { data: avis, loading, error, get } = useFetch();
 
   useEffect(() => {
-    get("/avis");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    get("/avis?statut=approuve");
+  }, [get]);
 
-  if (loading) return <p>Chargement...</p>;
+  if (loading) return <p className="text-center my-4">Chargement...</p>;
 
-  // Filtrer uniquement les avis approuvés
-  const avisValides = avis?.filter((a) => a.statut === "approuve") || [];
+  if (error) {
+    return (
+      <div className="alert alert-danger text-center my-4">
+        Impossible de récupérer les avis pour le moment.
+      </div>
+    );
+  }
+
+  const avisValides = Array.isArray(avis)
+    ? avis.filter((a) => a.statut === "approuve")
+    : [];
 
   return (
-    <section className="avis-clients p-6">
-      <h2 className="text-2xl font-bold mb-4">Avis clients validés</h2>
+    <section className="container my-4">
+      <h2 className="fw-bold mb-4">Avis clients</h2>
 
-      {avisValides.length === 0 && <p>Aucun avis validé pour le moment.</p>}
+      {avisValides.length === 0 && (
+        <p className="text-muted">Aucun avis validé pour le moment.</p>
+      )}
 
-      <div className="avis-list">
+      <div className="row g-3">
         {avisValides.map((item) => (
-          <div key={item.id} className="bg-white p-4 rounded shadow mb-3">
-            <p>
-              <strong>Note :</strong> {item.note}/5
-            </p>
-            <p className="mt-2">{item.description}</p>
-            <small className="text-gray-500">{item.created_at}</small>
+          <div key={item.id} className="col-12 col-md-6 col-lg-4">
+            <div className="card shadow-sm h-100">
+              <div className="card-body">
+                <p className="mb-2" aria-label={`Note : ${item.note} sur 5`}>
+                  {"★".repeat(Number(item.note))}
+                  {"☆".repeat(5 - Number(item.note))}
+                </p>
+                <p className="mb-2">{item.description}</p>
+                <small className="text-muted">
+                  {new Date(item.created_at).toLocaleDateString("fr-FR")}
+                </small>
+              </div>
+            </div>
           </div>
         ))}
       </div>

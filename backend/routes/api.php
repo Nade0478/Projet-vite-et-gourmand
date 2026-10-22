@@ -45,5 +45,8 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('regimes', RegimeController::class)->except(['index', 'show']);
     Route::apiResource('themes', ThemeController::class)->except(['index', 'show']);
     Route::apiResource('horaires', HoraireController::class)->except(['index', 'show']);
+
+    // Modération des avis (admin) : doit rester AVANT apiResource('avis')
+    Route::get('/avis/all', [AvisController::class, 'all']);
     Route::apiResource('avis', AvisController::class)->except(['index']);
 });
