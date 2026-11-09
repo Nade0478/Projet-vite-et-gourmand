@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
@@ -27,8 +28,10 @@ class AuthController extends Controller implements HasMiddleware
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:6',
             'telephone' => 'required|string',
-            'role_id' => 'required|exists:roles,id',
         ]);
+
+        // Le rôle est toujours « client » : il ne vient jamais de la requête
+        $role = Role::where('name', 'client')->firstOrFail();
 
         $user = User::create([
             'prenom' => $request->prenom,
@@ -36,14 +39,14 @@ class AuthController extends Controller implements HasMiddleware
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'telephone' => $request->telephone,
-            'role_id' => $request->role_id,
+            'role_id' => $role->id,
         ]);
 
         $token = JWTAuth::fromUser($user);
 
         return response()->json([
             'message' => 'Inscription réussie',
-            'user' => $user,
+            'user' => $user->load('role'),
             'token' => $token
         ], 201);
     }
@@ -65,7 +68,7 @@ class AuthController extends Controller implements HasMiddleware
         return response()->json([
             'message' => 'Connexion réussie',
             'token' => $token,
-            'user' => $user
+            'user' => $user->load('role')
         ]);
     }
 
@@ -74,7 +77,7 @@ class AuthController extends Controller implements HasMiddleware
         /** @var \App\Models\User|null $user */
         $user = auth()->user();
 
-        return response()->json($user);
+        return response()->json($user->load('role'));
     }
 
     public function logout()

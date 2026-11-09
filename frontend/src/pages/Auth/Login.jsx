@@ -1,20 +1,44 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Footer from "../../components/layout/Footer";
 import Navbar from "../../components/layout/Navbar";
 
+const PAGE_PAR_ROLE = {
+  administrateur: "/admin",
+  salarie: "/salarie",
+  client: "/profile",
+};
+
 export default function Login() {
   const { login } = useAuth();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [toast, setToast] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await login(email, password);
+    setToast(null);
 
-    if (!res.success) {
-      setToast({ message: res.error, type: "error" });
+    try {
+      const res = await login(email, password);
+
+      console.log("Réponse login :", res); // TEMPORAIRE : à supprimer après le test
+
+      if (!res.success) {
+        setToast({ message: res.error, type: "error" });
+        return;
+      }
+
+      const role = res.user?.role?.name;
+      navigate(PAGE_PAR_ROLE[role] || "/", { replace: true });
+    } catch (error) {
+      console.error(error);
+      setToast({
+        message: "Impossible de contacter le serveur.",
+        type: "error",
+      });
     }
   };
 
@@ -38,6 +62,7 @@ export default function Login() {
                     placeholder="Votre email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    required
                   />
                 </div>
 
@@ -50,6 +75,7 @@ export default function Login() {
                     placeholder="Votre mot de passe"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    required
                   />
                 </div>
 

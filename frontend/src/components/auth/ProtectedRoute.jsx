@@ -1,12 +1,20 @@
-import React from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
-export default function ProtectedRoute({ children }) {
-  const token = localStorage.getItem("auth_token");
+export default function ProtectedRoute({ allowedRoles }) {
+  const { user, loading } = useAuth();
 
-  if (!token) {
+  if (loading) {
+    return <p className="container my-5">Chargement...</p>;
+  }
+
+  if (!user) {
     return <Navigate to="/login" replace />;
   }
 
-  return children;
+  if (allowedRoles && !allowedRoles.includes(user.role?.name)) {
+    return <Navigate to="/" replace />;
+  }
+
+  return <Outlet />;
 }

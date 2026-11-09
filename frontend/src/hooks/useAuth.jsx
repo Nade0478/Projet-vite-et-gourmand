@@ -50,7 +50,7 @@ export default function useAuth() {
       if (response.ok) {
         localStorage.setItem("auth_token", data.token);
         setUser(data.user);
-        return { success: true };
+        return { success: true, user: data.user }; // ← MODIFIÉ
       }
 
       return { success: false, error: data.error || "Identifiants incorrects" };

@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import Loader from "../../components/ui/Loader";
+import Navbar from "../../components/layout/Navbar";
 import Footer from "../../components/layout/Footer";
 
 export default function DashboardSalarie() {
-  const { data, loading, get } = useFetch();
+  const { data, loading, error, get } = useFetch();
 
   useEffect(() => {
     get("/salarie/dashboard");
@@ -13,42 +15,67 @@ export default function DashboardSalarie() {
   if (loading) return <Loader />;
 
   return (
-    <div className="container mt-4">
-      <h1 className="fw-bold mb-4">Tableau de bord salarié</h1>
+    <>
+      <Navbar />
 
-      <div className="row g-4">
-        {/* Commandes du jour */}
-        <div className="col-12 col-md-4">
-          <div className="card shadow-sm">
-            <div className="card-body text-center">
-              <h2 className="fs-5 fw-semibold">Commandes du jour</h2>
-              <p className="fs-2 fw-bold mt-2">{data?.commandes_du_jour}</p>
+      <div className="container my-4">
+        <h1 className="fw-bold mb-4">Tableau de bord salarié</h1>
+
+        {error && (
+          <div className="alert alert-danger">
+            Impossible de récupérer les statistiques.
+          </div>
+        )}
+
+        <div className="row g-4 mb-4">
+          <div className="col-12 col-md-4">
+            <div className="card shadow-sm h-100">
+              <div className="card-body text-center">
+                <h2 className="fs-5 fw-semibold">Commandes du jour</h2>
+                <p className="fs-2 fw-bold mt-2">
+                  {data?.commandes_du_jour ?? "-"}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-12 col-md-4">
+            <div className="card shadow-sm h-100">
+              <div className="card-body text-center">
+                <h2 className="fs-5 fw-semibold">Menus préparés</h2>
+                <p className="fs-2 fw-bold mt-2">
+                  {data?.menus_prepares ?? "-"}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-12 col-md-4">
+            <div className="card shadow-sm h-100">
+              <div className="card-body text-center">
+                <h2 className="fs-5 fw-semibold">Heures travaillées</h2>
+                <p className="fs-2 fw-bold mt-2">
+                  {data?.heures_travaillees ?? "-"}
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Menus préparés */}
-        <div className="col-12 col-md-4">
-          <div className="card shadow-sm">
-            <div className="card-body text-center">
-              <h2 className="fs-5 fw-semibold">Menus préparés</h2>
-              <p className="fs-2 fw-bold mt-2">{data?.menus_prepares}</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Heures travaillées */}
-        <div className="col-12 col-md-4">
-          <div className="card shadow-sm">
-            <div className="card-body text-center">
-              <h2 className="fs-5 fw-semibold">Heures travaillées</h2>
-              <p className="fs-2 fw-bold mt-2">{data?.heures_travaillees}</p>
-            </div>
-          </div>
+        <div className="d-flex flex-wrap gap-2">
+          <Link to="/salarie/commandes" className="btn btn-dark">
+            Commandes
+          </Link>
+          <Link to="/salarie/avis" className="btn btn-dark">
+            Avis
+          </Link>
+          <Link to="/salarie/horaires" className="btn btn-dark">
+            Horaires
+          </Link>
         </div>
       </div>
 
       <Footer />
-    </div>
+    </>
   );
 }
