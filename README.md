@@ -117,7 +117,7 @@ src/
 ├── pages/
 │   ├── admin/
 │   └── Auth/          # Login, Register
-│       └── client/    # Profile, Commandes, CommandeCreate, Avis
+│       └── client/    # Profile, Commandes, Commandes, Avis
 └── tests/             # tests Jest et Testing Library
 ```
 

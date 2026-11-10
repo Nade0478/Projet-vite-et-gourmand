@@ -1,6 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
-import CommandeCreate from "../pages/Auth/client/CommandeCreate";
 import Commandes from "../pages/Auth/client/Commandes";
 
 // ─────────────────────────────────────────────
@@ -11,7 +10,7 @@ describe("Commandes", () => {
   test("Création – la page de création de commande s'affiche", () => {
     render(
       <MemoryRouter>
-        <CommandeCreate />
+        <Commandes />
       </MemoryRouter>
     );
 

@@ -4,7 +4,6 @@ import ProtectedRoutes from "./ProtectedRoutes";
 import Profile from "../pages/client/Profile";
 import Avis from "../pages/client/Avis";
 import Commandes from "../pages/client/Commandes";
-import CommandeCreate from "../pages/client/CommandeCreate";
 
 const ClientRoutes = (
   <>
@@ -39,7 +38,7 @@ const ClientRoutes = (
       path="/client/commande/create"
       element={
         <ProtectedRoutes role="client">
-          <CommandeCreate />
+          <Commandes />
         </ProtectedRoutes>
       }
     />

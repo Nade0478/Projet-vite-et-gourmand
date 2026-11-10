@@ -11,13 +11,12 @@ import MentionsLegales from "../pages/public/MentionsLegales";
 import Conditions from "../pages/public/Conditions";
 import Profile from "../pages/Auth/client/Profile";
 import Commandes from "../pages/Auth/client/Commandes";
-import CommandeCreate from "../pages/Auth/client/CommandeCreate";
 import Avis from "../pages/Auth/client/Avis";
 import DashboardSalarie from "../pages/salarie/DashboardSalarie";
-import CommandeSalarie from "../pages/salarie/Commande";
 import AvisSalarie from "../pages/salarie/Avis";
 import HorairesSalarie from "../pages/salarie/Horaires";
 import DashboardAdmin from "../pages/admin/DashboardAdmin";
+import CommandeSalarie from "../pages/salarie/Commandes";
 import MenusAdmin from "../pages/admin/Menus";
 import PlatsAdmin from "../pages/admin/Plats";
 import RegimesAdmin from "../pages/admin/Regimes";
@@ -55,7 +54,7 @@ export default function AppRoutes() {
         {/* Espace client */}
         <Route element={<ProtectedRoute allowedRoles={["client"]} />}>
           <Route path="/commandes" element={<Commandes />} />
-          <Route path="/commandes/nouvelle" element={<CommandeCreate />} />
+          <Route path="/commandes/nouvelle" element={<Commandes />} />
           <Route path="/avis" element={<Avis />} />
         </Route>
 
