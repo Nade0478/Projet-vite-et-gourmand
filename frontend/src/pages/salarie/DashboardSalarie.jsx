@@ -72,6 +72,15 @@ export default function DashboardSalarie() {
           <Link to="/salarie/horaires" className="btn btn-dark">
             Horaires
           </Link>
+          <Link to="/salarie/menus" className="btn btn-dark">
+            Menus
+          </Link>
+          <Link to="/salarie/plats" className="btn btn-dark">
+            Plats
+          </Link>
+          <Link to="/salarie/allergenes" className="btn btn-dark">
+            Allergenes
+          </Link>
         </div>
       </div>
 

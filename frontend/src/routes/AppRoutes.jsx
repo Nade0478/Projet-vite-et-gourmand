@@ -13,10 +13,11 @@ import Profile from "../pages/Auth/client/Profile";
 import Commandes from "../pages/Auth/client/Commandes";
 import Avis from "../pages/Auth/client/Avis";
 import DashboardSalarie from "../pages/salarie/DashboardSalarie";
+import CommandeSalarie from "../pages/salarie/Commandes";
 import AvisSalarie from "../pages/salarie/Avis";
 import HorairesSalarie from "../pages/salarie/Horaires";
+import AllergenesSalarie from "../pages/salarie/Allergenes";
 import DashboardAdmin from "../pages/admin/DashboardAdmin";
-import CommandeSalarie from "../pages/salarie/Commandes";
 import MenusAdmin from "../pages/admin/Menus";
 import PlatsAdmin from "../pages/admin/Plats";
 import RegimesAdmin from "../pages/admin/Regimes";
@@ -68,6 +69,9 @@ export default function AppRoutes() {
           <Route path="/salarie/commandes" element={<CommandeSalarie />} />
           <Route path="/salarie/avis" element={<AvisSalarie />} />
           <Route path="/salarie/horaires" element={<HorairesSalarie />} />
+          <Route path="/salarie/menus" element={<MenusAdmin />} />
+          <Route path="/salarie/plats" element={<PlatsAdmin />} />
+          <Route path="/salarie/allergenes" element={<AllergenesSalarie />} />
         </Route>
 
         {/* Espace administrateur */}
